@@ -1,5 +1,5 @@
 </div><!-- /wrapper -->
-
+<?php $front__id = (int)(get_option( 'page_on_front' )); ?>
 <footer role="contentinfo">
   <div class="inner">
 

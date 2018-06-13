@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+<?php $front__id = (int)(get_option( 'page_on_front' )); ?>
   <article>
 
     <h1 class="cat-title inner-title"><?php the_category(', '); ?></h1>

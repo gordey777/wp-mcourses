@@ -6,7 +6,7 @@
 @import 'import/tables';
 @import 'import/mixin';
 @import 'import/wordpress';
-@import 'fonts/font_roboto';
+@import 'fonts/fonts';
 
 
 @import 'fa/font-awesome.scss';
@@ -24,10 +24,14 @@ body {
   font-size: $base-font-size;
   font-weight: $fnorm;
   line-height: $base-line-height;
+
   min-width: 320px;
+
   transition: $base-transition;
+
   color: $base-font-color;
   background-color: $base-background-color;
+
   -webkit-font-smoothing: antialiased;
 }
 h1,
@@ -39,6 +43,7 @@ h6 {
   font-family: $heading-font-family;
   font-size: $base-font-size;
   line-height: $heading-line-height;
+
   margin: 0 0 $small-spacing;
 }
 p,
@@ -48,6 +53,7 @@ pre {
 a {
   transition: $base-transition;
   text-decoration: none;
+
   color: $action-color;
   &:active,
   &:focus,
@@ -62,6 +68,7 @@ a {
 }
 hr {
   margin: $base-spacing 0;
+
   border-top: none;
   border-right: none;
   border-bottom: $base-border;
@@ -74,6 +81,7 @@ picture {
 }
 .wrapper {
   position: relative;
+
   width: 100%;
   height: auto !important;
   height: 100%;
@@ -84,18 +92,107 @@ picture {
 }
 .container {
   position: relative;
-  max-width: $width;
+  //max-width: $width;
+}
+
+.bottom-shadow {
+  position: relative;
+  &:before {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+
+    height: 90px;
+
+    content: '';
+
+    background-image: url(../img/shadow.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: contain;
+  }
+}
+
+.flex_row {
+  display: flex;
+
+  flex-flow: row nowrap;
+  align-items: center;
 }
 
 header {
-  background-color: $gray-light;
-  .header--logo {
-    display: block;
+  height: 100px;
+
+  background: $gray-gradient;
+  //margin-bottom: 50px;
+  background-color: $gray-medium;
+  .container {
+    height: 100%;
+    > .row{
+      height: 100%;
+    }
+  }
+  .logo {
+    display: inline-block;
+    float: left;
+
+    padding: 0;
     img {
       max-width: 100%;
     }
   }
+  .header-slogan {
+    font-size: 21px;
+    font-weight: 500;
+
+    display: inline-block;
+    float: left;
+
+    padding: 0;
+
+    text-transform: uppercase;
+    span {
+      font-size: 12px;
+      font-weight: 400;
+
+      display: inline-block;
+
+      width: 100%;
+    }
+  }
+  .head-tel {
+    display: inline-block;
+    display: flex;
+
+    flex-flow: row nowrap;
+    align-items: center;
+    .call-wrapp {
+      padding: 0;
+    }
+    .tel-link {
+      font-size: 28px;
+      line-height: 1;
+
+      display: inline-block;
+
+      padding: 0;
+
+      color: #000;
+      &:hover {
+        color: $orange;
+      }
+      span {
+        display: inline-block;
+
+        padding: 0 8px;
+
+        color: $orange;
+      }
+    }
+  }
 }
+
 nav {
   ul {
     @extend .clearfix;
@@ -105,8 +202,74 @@ nav {
   }
 }
 
+
+.main-nav {
+  min-height: 100%;
+  //display: inline-block;
+  padding: 0;
+
+  align-self: stretch;
+}
+.lang-nav {
+  min-height: 100%;
+  //display: inline-block;
+
+  align-self: stretch;
+}
+
+.header--lang {
+  display: inline-block;
+  display: flex;
+
+  width: 100%;
+  min-height: 100%;
+
+  text-align: center;
+
+  background: $gray-medium;
+
+  justify-content: space-around;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  li {
+    display: inline-block;
+
+    width: 100%;
+    min-height: 50%;
+  }
+}
+
+.headnav {
+  display: inline-block;
+  display: flex;
+
+  height: 100%;
+
+  justify-content: space-around;
+  flex-flow: row nowrap;
+  align-items: center;
+   > li {
+    display: inline-block;
+     > a {
+      font-size: 21px;
+      font-weight: 500;
+
+      text-transform: uppercase;
+
+      color: #000;
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+}
+
+
+
+
 section {
-  padding: 0 0 $footer;
+  //padding: 0 0 $footer;
 }
 article {
   @extend .clearfix;
@@ -119,9 +282,20 @@ article {
 footer {
   height: $footer;
   margin: $footer_margin auto 0;
+
   background-color: $gray-light;
 }
 
+
+
+
+///MEDIA
+
+@media (min-width: 1350px) {
+  .container {
+    max-width: $width;
+  }
+}
 
 
 // col-xl-# ( ≥1200px)
@@ -151,4 +325,3 @@ footer {
 
 
 //preloader
-
