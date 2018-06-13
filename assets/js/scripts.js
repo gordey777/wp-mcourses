@@ -7565,6 +7565,7 @@ jQuery(document).ready(function($) {
   $('.menu-item a[href$="#"]').click(function(event) {
     return false;
   });
+
   //TABS
   $('.price-tab:not(.active)').fadeOut();
   $('.price--nav_item').click(function(event) {
@@ -7580,98 +7581,6 @@ jQuery(document).ready(function($) {
   });
 
 
-
-  $(function() {
-    var owltop = $('.owl-carousel-top');
-    owltop.owlCarousel({
-      autoplay: 2000,
-      items: 1,
-      autoplayHoverPause: true,
-      dots: false,
-      loop: true,
-      animateOut: 'fadeOut',
-      onInitialized: owlTopCount, //When the plugin has initialized.
-      onTranslated: owlTopCounter //When the translation of the stage has finished.
-    });
-
-
-
-    function owlTopCounter(event) {
-      var item = owltop.find('.owl-item.active .slides').data('dot');
-      $('.hsn-current').text(item);
-
-    }
-
-
-    function owlTopCount(event) {
-
-      //var element = event.target; // DOM element, in this example .owl-carousel
-      var items = event.item.count;
-
-      //$('.owl-carousel-top').find('.owl-dots').append('<span class="hsn-next">' + items + '</span>');
-
-      //$('.hsn-current').html(item)
-      $('.hsn-next').html(items)
-    }
-
-
-    var owlReviews = $('.hr-slide--container');
-    owlReviews.owlCarousel({
-      //items: 2,
-      loop: true,
-      //navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-      navText: ['', ''],
-      dots: false,
-      autoplay: true,
-      autoplayTimeout: 5000,
-      autoplayHoverPause: true,
-      margin: 30,
-      //stageOuterClass: 'owl-stage-outer container',
-      responsive: {
-
-        0: {
-          items: 1
-        },
-        993: {
-          nav: true,
-          items: 2
-        }
-      }
-    });
-    owlReviews.siblings('.carusel--nav-next').on('click', function() {
-      owlReviews.trigger('next.owl.carousel');
-    });
-    owlReviews.siblings('.carusel--nav-prev').on('click', function() {
-      owlReviews.trigger('prev.owl.carousel');
-    });
-
-    $('.recent-servises--slider').owlCarousel({
-      //items: 2,
-      loop: true,
-      dots: false,
-      navText: ['', ''],
-      autoplay: true,
-      autoplayTimeout: 5000,
-      autoplayHoverPause: true,
-      margin: 30,
-      //stageOuterClass: 'owl-stage-outer container',
-      responsive: {
-        0: {
-          items: 1
-        },
-        560: {
-          items: 2
-        },
-        993: {
-          nav: true,
-          items: 3
-        },
-        1200: {
-          nav: true,
-          items: 4
-        }
-      }
-    });
 
     $('.recommend-slider').owlCarousel({
       //items: 2,
@@ -7705,22 +7614,10 @@ jQuery(document).ready(function($) {
       }
     });
 
-  });
-
-
-  // add decorations <span> into buttons
-  $('.btn-blue-half').each(function(index, el) {
-    var span = $(el).find('span');
-    if (span.length == 0) {
-      var content = $(this).html();
-      content = content + '<span></span>';
-      $(el).html(content);
-    }
-  });
 
 
   //MOB menu
-  //if ($(window).width() < 992) {
+
   $(function() {
 
     $('header').prepend('<div id="mob_nav"></div>');
@@ -7731,7 +7628,7 @@ jQuery(document).ready(function($) {
 
 
   });
-  //}
+
   $(document).on('click', '#mob_nav .menu-item-has-children', function(e) {
 
     if (e.target != this) return;
@@ -7881,12 +7778,6 @@ jQuery(document).ready(function($) {
 
 
 
-  $(window).scroll(function() {
-
-    myLazyLoad();
-
-  });
-
 }); //doc.ready
 
 jQuery(window).resize(function(event) {
@@ -7897,34 +7788,6 @@ jQuery(window).resize(function(event) {
 
 
 
-$(window).load(function($) {
-  myLazyLoad();
-});
-
-function myLazyLoad() {
-  (function() {
-    var bottom_of_screen = $(window).scrollTop() + window.innerHeight;
-    var top_of_screen = $(window).scrollTop();
-
-
-    $('.lazy__load').each(function(index, el) {
-      var data__url = $(this).data('imgurl');
-      var top_of_element = $(this).offset().top;
-      var bottom_of_element = $(this).offset().top + $(this).outerHeight();
-      if ((bottom_of_screen > top_of_element) || (top_of_screen < bottom_of_element)) {
-        if ($(this).is('[src]')) {
-          $(this).attr('src', data__url);
-          //console.log('fotochka');
-        } else if ($(this).css('background-image') !== false) {
-          $(this).css('background-image', 'url("' + data__url + '")');
-        } else {
-          $(this).addClass('layzy__loaded');
-        }
-        $(this).removeClass('lazy__load');
-      }
-    });
-  })();
-}
 
 
 function reinitCF7() {

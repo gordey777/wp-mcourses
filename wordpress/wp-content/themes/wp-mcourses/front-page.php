@@ -36,8 +36,9 @@
                 часов
               </div>
             </div>
-            <button class="btn btn-green">Записатся</button>
-            <a href="" class="more-link">Подробнее</a>
+            <button class="btn">Записатся</button>
+            <a href="" class="btn more-link">Подробнее</a>
+            <input type="button" class="btn btn-violet">
           </div>
         </div>
       </div>

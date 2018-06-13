@@ -1,4 +1,5 @@
 <?php if (have_posts()): while (have_posts()) : the_post(); ?>
+  <?php $front__id = (int)(get_option( 'page_on_front' )); ?>
   <div id="post-<?php the_ID(); ?>" <?php post_class('looper'); ?>>
 
     <a rel="nofollow" class="feature-img" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
