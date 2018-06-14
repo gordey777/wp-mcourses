@@ -18,7 +18,15 @@
     <span class="author"><?php _e( 'Published by', 'wpeasy' ); ?> <?php the_author_posts_link(); ?></span>
     <span class="comments"><?php comments_popup_link( __( 'Leave your thoughts', 'wpeasy' ), __( '1 Comment', 'wpeasy' ), __( '% Comments', 'wpeasy' )); ?></span><!-- /post details -->
 
-    <?php wpeExcerpt('wpeExcerpt40'); ?>
 
+    <?php wpeExcerpt('wpeExcerpt40'); ?>
+<?php
+
+$dateformatstring = "d F Y";
+$unixtimestamp = strtotime(get_field('date'));
+
+echo date_i18n($dateformatstring, $unixtimestamp);
+
+?>
   </div><!-- /looper -->
 <?php endwhile; endif; ?>
