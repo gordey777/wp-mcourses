@@ -106,6 +106,7 @@ picture {
     height: 90px;
 
     content: '';
+    pointer-events: none;
 
     background-image: url(../img/shadow.png);
     background-repeat: no-repeat;
@@ -117,20 +118,18 @@ picture {
 .flex_row {
   display: flex;
 
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
 }
 
 header {
-  height: 100px;
-
   background: $gray-gradient;
   //margin-bottom: 50px;
   background-color: $gray-medium;
   .container {
     height: 100%;
-    > .row{
-      height: 100%;
+     > .row {
+      min-height: 100px;
     }
   }
   .logo {
@@ -152,13 +151,19 @@ header {
     padding: 0;
 
     text-transform: uppercase;
+
+    color: transparent;
+    background-color: #000;
+    -moz-background-clip: text;
+         background-clip: text;
+    text-shadow: rgba(255,255,255,.6) 0 3px 3px;
     span {
       font-size: 12px;
       font-weight: 400;
 
-      display: inline-block;
+      //display: inline-block;
 
-      width: 100%;
+      //width: 100%;
     }
   }
   .head-tel {
@@ -178,16 +183,25 @@ header {
 
       padding: 0;
 
-      color: #000;
+      color: transparent;
+      //color: #000;
+      background-color: #000;
+      -moz-background-clip: text;
+           background-clip: text;
+      text-shadow: rgba(255,255,255,.6) 0 3px 3px;
       &:hover {
-        color: $orange;
+        color: transparent;
+        background-color: $orange-med;
       }
       span {
-        display: inline-block;
-
+        //display: inline-block;
         padding: 0 8px;
 
-        color: $orange;
+        color: transparent;
+        background-color: $orange-med;
+        -moz-background-clip: text;
+             background-clip: text;
+        text-shadow: rgba(255,255,255,.6) 0 3px 3px;
       }
     }
   }
@@ -233,10 +247,27 @@ nav {
   align-items: center;
 
   li {
+    font-weight: 500;
+
     display: inline-block;
 
     width: 100%;
     min-height: 50%;
+
+
+    a {
+      text-transform: uppercase;
+
+      color: transparent;
+      background-color: #000;
+      -moz-background-clip: text;
+           background-clip: text;
+      text-shadow: rgba(255,255,255,.6) 0 3px 3px;
+      &:hover {
+        color: transparent;
+        background-color: $orange-med;
+      }
+    }
   }
 }
 
@@ -246,20 +277,54 @@ nav {
 
   height: 100%;
 
-  justify-content: space-around;
+  justify-content: space-between;
   flex-flow: row nowrap;
   align-items: center;
    > li {
     display: inline-block;
+    &:before {
+      position: absolute;
+      top: -25px;
+      right: 0;
+      left: 0;
+
+      display: inline-block;
+
+      height: 20px;
+
+      content: '';
+      pointer-events: none;
+
+      opacity: 0;
+      background: url(../img/decor-menu.png) no-repeat center center;
+      background-size: auto;
+    }
      > a {
       font-size: 21px;
       font-weight: 500;
 
+      transition: $base-transition;
       text-transform: uppercase;
 
-      color: #000;
+      color: transparent;
+      //color: #000;
+      background-color: #000;
+      -moz-background-clip: text;
+           background-clip: text;
+      text-shadow: rgba(255,255,255,.6) 0 3px 3px;
       &:hover {
-        color: $orange;
+        color: transparent;
+        background-color: $orange-med;
+      }
+    }
+    &.current-menu-item {
+      position: relative;
+      &:before {
+        opacity: 1;
+      }
+       > a {
+        color: transparent;
+        background-color: $orange-med;
       }
     }
   }
@@ -294,6 +359,49 @@ footer {
 @media (min-width: 1350px) {
   .container {
     max-width: $width;
+  }
+}
+
+@media (max-width: 1349px) {
+  .callback {
+    width: 50px;
+    height: 50px;
+  }
+  header {
+    .container {
+       > .row {
+        min-height: 80px;
+      }
+    }
+    .logo {
+      padding-right: 10px;
+    }
+    .header-slogan {
+      font-size: 19px;
+      span {
+        font-size: 11.5px;
+      }
+    }
+    .head-tel {
+      .tel-link {
+        font-size: 25px;
+      }
+    }
+  }
+  .header--lang {
+    li {
+      a {
+        //
+      }
+    }
+  }
+
+  .headnav {
+     > li {
+       > a {
+        font-size: 18px;
+      }
+    }
   }
 }
 
