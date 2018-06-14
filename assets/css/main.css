@@ -6273,6 +6273,7 @@ picture {
   left: 0;
   height: 90px;
   content: '';
+  pointer-events: none;
   background-image: url(../img/shadow.png);
   background-repeat: no-repeat;
   background-position: top center;
@@ -6281,12 +6282,11 @@ picture {
 
 .flex_row {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
 }
 
 header {
-  height: 100px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, #e8e8e8 90%, #e8e8e8 100%);
   background-color: #e8e8e8;
 }
@@ -6296,7 +6296,7 @@ header .container {
 }
 
 header .container > .row {
-  height: 100%;
+  min-height: 100px;
 }
 
 header .logo {
@@ -6316,13 +6316,16 @@ header .header-slogan {
   float: left;
   padding: 0;
   text-transform: uppercase;
+  color: transparent;
+  background-color: #000;
+  -moz-background-clip: text;
+  background-clip: text;
+  text-shadow: rgba(255, 255, 255, 0.6) 0 3px 3px;
 }
 
 header .header-slogan span {
   font-size: 12px;
   font-weight: 400;
-  display: inline-block;
-  width: 100%;
 }
 
 header .head-tel {
@@ -6341,17 +6344,25 @@ header .head-tel .tel-link {
   line-height: 1;
   display: inline-block;
   padding: 0;
-  color: #000;
+  color: transparent;
+  background-color: #000;
+  -moz-background-clip: text;
+  background-clip: text;
+  text-shadow: rgba(255, 255, 255, 0.6) 0 3px 3px;
 }
 
 header .head-tel .tel-link:hover {
-  color: #ffae00;
+  color: transparent;
+  background-color: #cf722a;
 }
 
 header .head-tel .tel-link span {
-  display: inline-block;
   padding: 0 8px;
-  color: #ffae00;
+  color: transparent;
+  background-color: #cf722a;
+  -moz-background-clip: text;
+  background-clip: text;
+  text-shadow: rgba(255, 255, 255, 0.6) 0 3px 3px;
 }
 
 nav ul li {
@@ -6382,16 +6393,31 @@ nav ul li {
 }
 
 .header--lang li {
+  font-weight: 500;
   display: inline-block;
   width: 100%;
   min-height: 50%;
+}
+
+.header--lang li a {
+  text-transform: uppercase;
+  color: transparent;
+  background-color: #000;
+  -moz-background-clip: text;
+  background-clip: text;
+  text-shadow: rgba(255, 255, 255, 0.6) 0 3px 3px;
+}
+
+.header--lang li a:hover {
+  color: transparent;
+  background-color: #cf722a;
 }
 
 .headnav {
   display: inline-block;
   display: flex;
   height: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-flow: row nowrap;
   align-items: center;
 }
@@ -6400,15 +6426,48 @@ nav ul li {
   display: inline-block;
 }
 
+.headnav > li:before {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  left: 0;
+  display: inline-block;
+  height: 20px;
+  content: '';
+  pointer-events: none;
+  opacity: 0;
+  background: url(../img/decor-menu.png) no-repeat center center;
+  background-size: auto;
+}
+
 .headnav > li > a {
   font-size: 21px;
   font-weight: 500;
+  transition: background-color 750ms ease, color 105ms ease, opacity 45ms ease;
   text-transform: uppercase;
-  color: #000;
+  color: transparent;
+  background-color: #000;
+  -moz-background-clip: text;
+  background-clip: text;
+  text-shadow: rgba(255, 255, 255, 0.6) 0 3px 3px;
 }
 
 .headnav > li > a:hover {
-  color: #ffae00;
+  color: transparent;
+  background-color: #cf722a;
+}
+
+.headnav > li.current-menu-item {
+  position: relative;
+}
+
+.headnav > li.current-menu-item:before {
+  opacity: 1;
+}
+
+.headnav > li.current-menu-item > a {
+  color: transparent;
+  background-color: #cf722a;
 }
 
 footer {
@@ -6420,6 +6479,31 @@ footer {
 @media (min-width: 1350px) {
   .container {
     max-width: 1260px;
+  }
+}
+
+@media (max-width: 1349px) {
+  .callback {
+    width: 50px;
+    height: 50px;
+  }
+  header .container > .row {
+    min-height: 80px;
+  }
+  header .logo {
+    padding-right: 10px;
+  }
+  header .header-slogan {
+    font-size: 19px;
+  }
+  header .header-slogan span {
+    font-size: 11.5px;
+  }
+  header .head-tel .tel-link {
+    font-size: 25px;
+  }
+  .headnav > li > a {
+    font-size: 18px;
   }
 }
 
