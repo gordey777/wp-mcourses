@@ -54,9 +54,6 @@
           </div>
         </div>
 
-
-
-
       </div>
     </div>
 
@@ -66,7 +63,10 @@
       </p><!-- /copyright -->
     </div>
   </footer><!-- /footer -->
-
+  <script>
+    var frontid = <?php echo $front__id; ?>;
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZF31krTQH_5QnEpdIsEgmsBV-Iy884rE"></script>
   <?php wp_footer(); ?>
 
 </body>
