@@ -1,5 +1,6 @@
 <?php if (have_posts()): while (have_posts()) : the_post(); ?>
   <?php $front__id = (int)(get_option( 'page_on_front' )); ?>
+         <?php //get_page_template_slug( get_the_ID() );?>
   <div id="post-<?php the_ID(); ?>" <?php post_class('looper'); ?>>
 
     <a rel="nofollow" class="feature-img" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
@@ -29,4 +30,25 @@ echo date_i18n($dateformatstring, $unixtimestamp);
 
 ?>
   </div><!-- /looper -->
+
+ <?php if ( has_post_thumbnail()) {
+      $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+    } else {
+      $image = catchFirstImage();
+    } ?>
+    <?php the_field('type_label');?>
+    <?php the_field('course_type');?>
+    <?php the_field('type_color');?>
+    <?php the_field('price_label');?>
+    <?php the_field('price');?>
+    <?php the_field('price_unit');?>
+    <?php the_field('duration_label');?>
+    <?php the_field('duration');?>
+    <?php the_field('duration_unit');?>
+    <?php the_field('date_label');?>
+    <?php //the_sub_field('');?>
+
+
+
+
 <?php endwhile; endif; ?>

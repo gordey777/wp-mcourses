@@ -33,6 +33,8 @@ function my_acf_init() {
   acf_update_setting('google_api_key', 'AIzaSyCZF31krTQH_5QnEpdIsEgmsBV-Iy884rE');
 }
 
+
+
 add_action('wp_enqueue_scripts', 'wpeStyles'); // Add Theme Stylesheet
 function wpeStyles()  {
   wp_dequeue_style('fancybox');
@@ -97,13 +99,13 @@ add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);*/
 
 // Move js and css to footer
 function remove_head_scripts() {
-  remove_action( 'wp_head', 'wp_print_styles', 8);
+  //remove_action( 'wp_head', 'wp_print_styles', 8);//remove CSS
   remove_action('wp_head', 'wp_print_scripts');
   remove_action('wp_head', 'wp_print_head_scripts', 9);
   remove_action('wp_head', 'wp_enqueue_scripts', 1);
 
 
-  add_action('wp_footer', 'wp_print_styles', 5);
+  //add_action('wp_footer', 'wp_print_styles', 5); //ADD CSS TO FOOTER
   add_action('wp_footer', 'wp_print_scripts', 5);
   add_action('wp_footer', 'wp_enqueue_scripts', 5);
   add_action('wp_footer', 'wp_print_head_scripts', 5);
@@ -195,7 +197,7 @@ function wpeLangNav() {
   );
 }
 // WPE footer navigation
-function wpeFootNav() {
+/*function wpeFootNav() {
   wp_nav_menu(
   array(
     'theme_location'  => 'footer-menu',
@@ -216,7 +218,7 @@ function wpeFootNav() {
     'walker'          => ''
     )
   );
-}
+}*/
 // WPE sidebar navigation
 function wpeSideNav() {
   wp_nav_menu(
@@ -247,7 +249,7 @@ function register_html5_menu() {
     'header-menu' => __('Меню в шапке', 'wpeasy'),
     'lang-menu' => __('Меню языков', 'wpeasy'),
     'sidebar-menu' => __('Меню в сайдбар', 'wpeasy'),
-    'footer-menu' => __('Меню в подвал', 'wpeasy')
+    //'footer-menu' => __('Меню в подвал', 'wpeasy')
   ));
 }
 //  If Dynamic Sidebar Existsов
@@ -455,9 +457,9 @@ remove_action('wp_head', 'index_rel_link'); // Index link
 remove_action('wp_head', 'parent_post_rel_link', 10, 0); // Prev link
 remove_action('wp_head', 'start_post_rel_link', 10, 0); // Start link
 remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // Display relational links for the posts adjacent to the current post.
-remove_action('wp_head', 'wp_generator'); // Display the XHTML generator that is generated on the wp_head hook, WP version
+//remove_action('wp_head', 'wp_generator'); // Display the XHTML generator that is generated on the wp_head hook, WP version
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-remove_action('wp_head', 'rel_canonical');
+//remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
 // Add Filters

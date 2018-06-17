@@ -1,5 +1,6 @@
 <!doctype html>
 <html <?php language_attributes(); ?> class="no-js">
+<?php $front__id = (int)(get_option( 'page_on_front' )); ?>
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -21,7 +22,7 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-  <?php $front__id = (int)(get_option( 'page_on_front' )); ?>
+
 <!-- wrapper -->
 <div class="wrapper">
   <header role="banner">

@@ -39,6 +39,7 @@ $blue-dark: #00616f;
 $violet: #8e24aa;
 $violet-dark: #5f0376;
 $green: #8bab00;
+$green-light: #d8de6d;
 $green-dark: #8bab00;
 
 $gray-medium: #e8e8e8;
@@ -69,10 +70,11 @@ $base-border: 1px solid $base-border-color;
 $base-background-color: #fff;
 $secondary-background-color: tint($base-border-color, 75%);
 
-// Box Shadows
+// Shadows
 $btn-shadow:inset 0 1px 3px rgba(#fff, .06);
 $btn-hover-shadow:inset 0 1px 3px rgba(#fff, .06);
-$base-box-shadow: 0 1px 3px rgba(#000, .06);
+$base-box-shadow: 0 1px 18px rgba(50,50,50,.6);
+$text-shadow: 0 4px 9px rgba(50,50,50,.8);
 
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, .06);
