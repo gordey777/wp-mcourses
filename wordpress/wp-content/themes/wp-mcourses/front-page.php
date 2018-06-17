@@ -74,7 +74,7 @@
           <div class="course-item-wrap col-sm-6">
             <div class="course-item <?php the_field('type_color', $termACF);?>">
 
-              <div class="course-img col-12 ratio" data-hkoef=".8" style="background-image: url(<?php echo $catImage; ?>);"></div>
+              <div class="course-img col-12 ratio" data-hkoef=".6" style="background-image: url(<?php echo $catImage; ?>);"></div>
 
               <div class="course-content-wrap col-md-10 offset-md-1">
 
