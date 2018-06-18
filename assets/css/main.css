@@ -6214,7 +6214,7 @@ body {
   line-height: 1.1;
   min-width: 320px;
   transition: background-color 750ms ease, color 105ms ease, opacity 45ms ease;
-  color: #333;
+  color: #999;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
 }
@@ -6285,11 +6285,13 @@ picture {
   position: relative;
 }
 
-.bottom-shadow:before {
+.bottom-shadow:after {
   position: absolute;
+  z-index: 1;
   top: 100%;
   right: 0;
   left: 0;
+  display: inline-block;
   height: 90px;
   content: '';
   pointer-events: none;
@@ -6863,10 +6865,17 @@ nav ul li {
 
 #calendar {
   overflow: hidden;
+  width: 100%;
+  height: auto;
   padding-top: 40px;
   transition: all .3s;
   background: url(../img/bg-raspisanie.jpg) no-repeat center top;
   background-size: cover;
+}
+
+#calendar + div.bottom-shadow {
+  height: 0;
+  margin-bottom: 90px;
 }
 
 .cal-tab-nav {
@@ -7141,6 +7150,197 @@ nav ul li {
 
 .calendar-list-item.violet:before {
   background: rgba(200, 61, 110, 0.7);
+}
+
+#about {
+  margin-bottom: 50px;
+  transition: all .3s;
+  text-align: center;
+  background: url(../img/bg-about.jpg) no-repeat center;
+  background-size: cover;
+}
+
+#about .page-content {
+  font-size: 21px;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+#about .page-content:before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  height: 25px;
+  content: '';
+  pointer-events: none;
+  background: url(../img/decor-border.png) no-repeat center bottom;
+  background-size: contain;
+}
+
+#about .page-content p {
+  margin-bottom: 30px;
+}
+
+#about .container {
+  padding-bottom: 60px;
+}
+
+.about-adv-item .icon {
+  display: inline-block;
+  width: 100%;
+  height: 90px;
+  margin-bottom: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.about-adv-item .title {
+  font-size: 67px;
+  font-weight: 500;
+  display: inline-block;
+  width: 100%;
+  color: #fb8c00;
+}
+
+.about-adv-item .desc {
+  font-size: 21px;
+  display: inline-block;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.about-slider {
+  padding-bottom: 60px;
+}
+
+.about-slider .owl-stage-outer {
+  background: #fff;
+  box-shadow: 0 1px 18px rgba(50, 50, 50, 0.6);
+}
+
+.about-slider .owl-stage {
+  display: flex;
+  margin: 0 auto;
+  flex-flow: row wrap;
+  align-items: stretch;
+}
+
+.about-slider .about-advantages-item {
+  min-height: 100%;
+}
+
+.about-slider .owl-dots {
+  position: absolute;
+  z-index: 3;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+}
+
+.about-slider .owl-dots .owl-dot {
+  width: 25px;
+  height: 25px;
+  margin: 0 5px;
+  opacity: .8;
+  border: 1px solid #999;
+  border-radius: 50%;
+  outline: 0;
+  background: #e8e8e8;
+}
+
+.about-slider .owl-dots .owl-dot:first-child {
+  margin-left: auto;
+}
+
+.about-slider .owl-dots .owl-dot:last-child {
+  margin-right: auto;
+}
+
+.about-slider .owl-dots .owl-dot:hover, .about-slider .owl-dots .owl-dot.active {
+  border-color: #fb8c00;
+  background: #fb8c00;
+}
+
+.about-slider .owl-dots .owl-dot:hover {
+  opacity: 1;
+}
+
+.about-slider .owl-dots .owl-dot:active, .about-slider .owl-dots .owl-dot:focus, .about-slider .owl-dots .owl-dot:hover {
+  outline: 0;
+}
+
+.about-advantages-wrap {
+  padding-top: 30%;
+  position: relative;
+  z-index: 2;
+}
+
+.about-advantages-wrap:before {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: -5%;
+  display: inline-block;
+  width: 80%;
+  content: '';
+  pointer-events: none;
+  background: url(../img/bg-about-foto.png) no-repeat center bottom;
+  background-size: auto 100%;
+}
+
+.about-advantages-item {
+  display: inline-block;
+  width: 100%;
+  padding: 30px 20px;
+  background: #fff;
+}
+
+.about-advantages-item .icon {
+  display: inline-block;
+  width: 100%;
+  height: 45px;
+  margin-bottom: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.about-advantages-item .title {
+  font-size: 28px;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 25px;
+  padding-bottom: 30px;
+  text-transform: uppercase;
+  color: #8bab00;
+}
+
+.about-advantages-item .title:before {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: inline-block;
+  width: 130px;
+  height: 25px;
+  margin: 0 -65px;
+  content: '';
+  pointer-events: none;
+  background: url(../img/decor-title-big.png) no-repeat center bottom;
+  background-size: contain;
+}
+
+.about-advantages-item .desc {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 .home-video--item {

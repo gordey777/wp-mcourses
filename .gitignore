@@ -1,5 +1,6 @@
 /.hg
 
+*.psd
 *.log
 *.map
 *.orig
@@ -24,6 +25,7 @@ sitemap*.xml.gz
 Desktop.ini
 .Spotlight-V100
 .Trashes
+
 
 node_modules
 node_modules/**

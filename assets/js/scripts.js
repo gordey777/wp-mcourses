@@ -7900,43 +7900,53 @@ jQuery(document).ready(function($) {
 
 
 
-
-
-  $('.tab-item-slider').each(function(index, el) {
-
-
-  $(this).owlCarousel({
-    //items: 2,
+  $('.about-slider').owlCarousel({
+    items: 1,
     rewind: true,
-    //loop: true,
-    //navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-    navText: ['', ''],
+
     autoplay: true,
     autoplayTimeout: 5000,
     autoplayHoverPause: true,
     margin: 20,
     dots: true,
-    responsive: {
-      0: {
-        items: 1
-      },
-      560: {
-        items: 2
-      },
-      768: {
 
-        items: 3
-      },
-      992: {
-        //nav: true,
-        items: 3
-      },
-      1200: {
-        //nav: true,
-        items: 3
-      }
-    }
   });
+
+  $('.tab-item-slider').each(function(index, el) {
+
+
+    $(this).owlCarousel({
+      //items: 2,
+      rewind: true,
+      //loop: true,
+      //navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+      navText: ['', ''],
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true,
+      margin: 20,
+      dots: true,
+      responsive: {
+        0: {
+          items: 1
+        },
+        560: {
+          items: 2
+        },
+        768: {
+
+          items: 3
+        },
+        992: {
+          //nav: true,
+          items: 3
+        },
+        1200: {
+          //nav: true,
+          items: 3
+        }
+      }
+    });
   });
 
   //TABS
