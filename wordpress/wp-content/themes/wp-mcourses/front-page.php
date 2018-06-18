@@ -17,51 +17,49 @@
   <?php $courseList = get_field('home_courses_list');
 
   if( $courseList ): ?>
+
     <?php $i = 0; ?>
     <div class="row courses-wrap">
-    <?php foreach( $courseList as $term):
-
-      $term__id = $term->term_id;
-      $termACF = 'term_' . $term__id;
-      $catImage = get_field('category_img', $termACF);
-      if (get_field('course_type', $termACF)){
-        $catTitle = get_field('course_type', $termACF);
+    <?php foreach( $courseList as $post):
+      setup_postdata($post);
+      $post__id = get_the_ID();
+      if ( has_post_thumbnail()) {
+        $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
       } else {
-        $catTitle = $term->name;
+        $image = catchFirstImage();
       }
-      $icon = get_field('type_icon', $termACF); ?>
-
+      $icon = get_field('type_icon'); ?>
 
 
       <?php if($i == 0): ?>
         <div class="course-item-wrap first-item col-12">
-          <div class="courses-first course-item row <?php the_field('type_color', $termACF);?>">
+          <div class="courses-first course-item row <?php the_field('type_color');?>">
 
 
-              <div class="course-img col-lg-7 col-md-6 ratio" data-hkoef=".8" style="background-image: url(<?php echo $catImage; ?>);"></div>
+              <div class="course-img col-lg-7 col-md-6 ratio" data-hkoef=".8" style="background-image: url(<?php echo $image; ?>);"></div>
 
               <div class="course-content-wrap  col-lg-5 col-md-6">
 
                 <div class="course-title">
                   <div class="course-icon" style="background-image: url(<?php echo $icon; ?>);"></div>
-                  <div class="course-label"><?php the_field('type_label', $termACF);?></div>
-                  <div class="course-type"><?php echo $catTitle; ?></div>
+                  <div class="course-label"><?php the_field('type_label');?></div>
+                  <div class="course-type"><?php if(get_field('alt_tittle')){ the_field('alt_tittle'); } else { the_title(); }; ?></div>
                 </div>
                 <div class="course-content">
-                  <div class="course-desc"><?php echo $term->description; ?></div>
+                  <div class="course-desc"><?php wpeExcerpt('wpeExcerpt40'); ?></div>
                   <div class="course-content-bottom">
                     <div class="course-price">
-                      <div class="label"><?php the_field('price_label');?>стоимость</div>
-                      <div class="value"><?php the_field('price');?>1500</div>
-                      <div class="units"><?php the_field('price_unit');?>грн/мес.</div>
+                      <div class="label"><?php the_field('price_label');?></div>
+                      <div class="value"><?php the_field('price');?></div>
+                      <div class="units"><?php the_field('price_unit');?></div>
                     </div>
                     <div class="course-duration">
-                      <div class="label"><?php the_field('duration_label');?>продолжительность</div>
-                      <div class="value"><?php the_field('duration');?>16</div>
-                      <div class="units"><?php the_field('duration_unit');?>часов</div>
+                      <div class="label"><?php the_field('duration_label');?></div>
+                      <div class="value"><?php the_field('duration');?></div>
+                      <div class="units"><?php the_field('duration_unit');?></div>
                     </div>
                     <button class="btn">Записатся</button>
-                    <a href="<?php echo get_term_link( $term ); ?>" class="btn more-link">Подробнее</a>
+                    <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
                   </div>
                 </div>
               </div>
@@ -74,30 +72,30 @@
           <div class="course-item-wrap col-sm-6">
             <div class="course-item <?php the_field('type_color', $termACF);?>">
 
-              <div class="course-img col-12 ratio" data-hkoef=".6" style="background-image: url(<?php echo $catImage; ?>);"></div>
+              <div class="course-img col-12 ratio" data-hkoef=".6" style="background-image: url(<?php echo $image; ?>);"></div>
 
               <div class="course-content-wrap col-md-10 offset-md-1">
 
                 <div class="course-title">
                   <div class="course-icon" style="background-image: url(<?php echo $icon; ?>);"></div>
-                  <div class="course-label"><?php the_field('type_label', $termACF);?></div>
-                  <div class="course-type"><?php echo $catTitle; ?></div>
+                  <div class="course-label"><?php the_field('type_label');?></div>
+                  <div class="course-type"><?php if(get_field('alt_tittle')){ the_field('alt_tittle'); } else { the_title(); }; ?></div>
                 </div>
                 <div class="course-content">
-                  <div class="course-desc"><?php echo $term->description; ?></div>
+                  <div class="course-desc"><?php wpeExcerpt('wpeExcerpt40'); ?></div>
                   <div class="course-content-bottom">
                     <div class="course-price">
-                      <div class="label"><?php the_field('price_label');?>стоимость</div>
-                      <div class="value"><?php the_field('price');?>1500</div>
-                      <div class="units"><?php the_field('price_unit');?>грн/мес.</div>
+                      <div class="label"><?php the_field('price_label');?></div>
+                      <div class="value"><?php the_field('price');?></div>
+                      <div class="units"><?php the_field('price_unit');?></div>
                     </div>
                     <div class="course-duration">
-                      <div class="label"><?php the_field('duration_label');?>продолжительность</div>
-                      <div class="value"><?php the_field('duration');?>16</div>
-                      <div class="units"><?php the_field('duration_unit');?>часов</div>
+                      <div class="label"><?php the_field('duration_label');?></div>
+                      <div class="value"><?php the_field('duration');?></div>
+                      <div class="units"><?php the_field('duration_unit');?></div>
                     </div>
                     <button class="btn">Записатся</button>
-                    <a href="<?php echo get_term_link( $term ); ?>" class="btn more-link">Подробнее</a>
+                    <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
                   </div>
                 </div>
               </div>
@@ -108,69 +106,122 @@
 
         <?php $i++; ?>
       <?php endforeach; ?>
-
+      <?php wp_reset_postdata(); ?>
     </div>
   <?php endif; ?>
   </div>
 </section>
 
+
+<?php if( have_rows('home_calendar') ): ?>
 <section id="calendar">
+  <div class="container">
+    <div class="row">
+      <div class="section-title col-12"><?php the_field('home_calendar_title'); ?></div>
+    </div>
 
-  <?php if( have_rows('home_calendar') ): ?>
+    <div class="cal-tab-nav row">
+      <?php $i = 0; ?>
+      <?php while( have_rows('home_calendar') ):
+        the_row();
+        $i++;
+        $icon = get_sub_field('type_icon');
+        if($i == 1){
+          $activeClass = 'active';
 
-    <?php the_field('home_calendar_title'); ?>
+        }else{
+          $activeClass = '';
+        }
+        ?>
+        <a href="#tab-<?php echo $i; ?>" class="tab-nav-item col-4 <?php echo $activeClass; ?> <?php the_sub_field('type_color'); ?>">
+          <div class="icon" style="background-image: url(<?php echo $icon; ?>);"></div>
+          <div class="label"><?php the_sub_field('title_label'); ?></div>
+          <div class="title"><?php the_sub_field('title'); ?></div>
+          <div class="days">
+          <?php $days = get_sub_field('days');
+            if( $days ): ?>
+              <?php foreach( $days as $day ): ?>
+                <span><?php echo __($day); ?></span>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </a>
+      <?php endwhile; ?>
+    </div>
+    <div class="row cal-tabs">
 
-    <?php $i = 0; ?>
-      <?php while( have_rows('home_calendar') ): the_row(); ?>
-      <?php the_sub_field('title_label'); ?>
-      <?php the_sub_field('title'); ?>
-      <?php $i++; ?>
-    <?php endwhile; ?>
+        <?php $k = 0; ?>
+        <?php while( have_rows('home_calendar') ):
+          the_row();
+          $k++;
+          $colorClass = get_sub_field('type_color');
+          if($k == 1){
+            $activeClass = 'active';
 
-    <?php $k = 0; ?>
-    <?php while( have_rows('home_calendar') ): the_row();
+          }else{
+            $activeClass = '';
+          }
+          ?>
+          <div id="tab-<?php echo $k; ?>" class="tab-item tab-item-slider col-12 owl-carousel <?php echo $activeClass; ?>">
+            <?php if( have_rows('calendar_list') ): ?>
+              <?php while( have_rows('calendar_list') ):
+                the_row();
+                $icon = get_sub_field('type_icon');
 
-      $calendar_list = get_sub_field('calendar_list'); ?>
-      <?php $masageList = get_field('home_masages_list');
-      if( $masageList ): ?>
-        <?php foreach( $courseList as $post): ?>
+                $listItem = get_sub_field('item_page'); ?>
 
+                  <?php if( $masageList && get_sub_field('item_type')): ?>
+                    <?php foreach( $listItem as $post): ?>
 
+                      <?php setup_postdata($post);
+                      $post__id = get_the_ID();
+                      if ( has_post_thumbnail()) {
+                        $bg = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+                      } else {
+                        $bg = catchFirstImage();
+                      } ?>
 
+                      <div class="calendar-list-item <?php echo $colorClass; ?>" style="background-image: url(<?php echo $bg; ?>);">
+                        <div class="date-wrap">
+                          <div class="year"><?php echo date_i18n("Y", strtotime(get_field('date'))); ?></div>
+                          <div class="date"><?php echo date_i18n("d.m", strtotime(get_field('date'))); ?></div>
+                          <div class="day"><?php echo __(date_i18n("l", strtotime(get_field('date')))); ?></div>
+                        </div>
+                        <div class="label"><?php the_field('date_label'); ?></div>
+                        <div class="title"><?php the_title(); ?></div>
+                      </div>
 
+                    <?php endforeach; ?>
+                    <?php wp_reset_postdata(); ?>
 
+                  <?php else:
 
+                    $bg = get_sub_field('item_img')['sizes']['medium']; ?>
+                    <div class="calendar-list-item <?php echo $colorClass; ?>" style="background-image: url(<?php echo $bg; ?>);">
+                      <div class="date-wrap">
+                        <div class="year"><?php echo date_i18n("Y", strtotime(get_sub_field('item_date'))); ?></div>
+                        <div class="date"><?php echo date_i18n("d.m", strtotime(get_sub_field('item_date'))); ?></div>
+                        <div class="day"><?php echo __(date_i18n("l", strtotime(get_sub_field('item_date')))); ?></div>
+                      </div>
+                      <div class="label"><?php the_sub_field('item_label'); ?></div>
+                      <div class="title"><?php the_sub_field('item_title'); ?></div>
+                    </div>
 
+                  <?php endif; ?>
 
+                <?php endwhile; ?>
+              <?php endif; ?>
+            </div>
+          <?php endwhile; ?>
 
+      </div>
 
-
-
-
-          <?php setup_postdata($post);?>
-
-
-          <?php the_title(); ?>
-
-
-
-
-
-
-        <?php endforeach; ?>
-        <?php wp_reset_postdata(); ?>
-      <?php endif; ?>
-
-
-
-      <?php $K++; ?>
-    <?php endwhile; ?>
-
-
+    </div>
+  </section>
 <?php endif; ?>
 
 
-
+<section id="">
 <div class="container">
 <?php the_field('home_masages_list_title');?>
 <?php the_field('home_masages_list_subitle');?>
@@ -187,43 +238,7 @@ if( $masageList ): ?>
 
       <?php //the_sub_field('');?>
 
-        <div class="course-item col-sm-6 <?php the_sub_field('color_style');?>">
 
-            <div class="course-img ratio" data-hcoef=".8"></div>
-
-            <div class="course-content">
-              <div class="course-type">Учебный курс</div>
-              <div class="course-title">для начинающих</div>
-              <div class="course-content">
-                <p>Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus suscipit tortor eget felis porttitor volutpat. Nulla porttitor accumsan tincidunt. <br>Curabitur aliquet quam id dui posuere blandit. Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada.</p>
-              </div>
-              <div class="course-price">
-                <div class="label">
-                  Стоимость
-                </div>
-                <div class="value">
-                  3800
-                </div>
-                <div class="units">
-                  грн./мес
-                </div>
-              </div>
-              <div class="course-duration">
-                <div class="label">
-                  Продолжительность
-                </div>
-                <div class="value">
-                  120
-                </div>
-                <div class="units">
-                  часов
-                </div>
-              </div>
-              <button class="btn">Записатся</button>
-              <a href="" class="btn more-link">Подробнее</a>
-              <input type="button" class="btn btn-violet">
-            </div>
-          </div>
 
     <?php endforeach; ?>
     <?php wp_reset_postdata(); ?>

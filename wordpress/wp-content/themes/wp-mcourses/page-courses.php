@@ -1,7 +1,7 @@
 <?php
 /*
-Template Name: Course Page
-Template Post Type: post, page
+Template Name: Courses Page
+Template Post Type: page
 */
 get_header(); ?>
 <?php $front__id = (int)(get_option( 'page_on_front' )); ?>
@@ -29,8 +29,7 @@ get_header(); ?>
 
       <?php edit_post_link(); ?>
 
-      <?php $parent = get_ancestors( $post__id, 'page' );
-var_dump($parent); ?>
+      <?php comments_template(); ?>
 
     </article>
   <?php endwhile; endif; ?>
