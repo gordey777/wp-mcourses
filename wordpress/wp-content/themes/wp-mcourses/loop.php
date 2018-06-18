@@ -31,11 +31,11 @@ echo date_i18n($dateformatstring, $unixtimestamp);
 ?>
   </div><!-- /looper -->
 
- <?php if ( has_post_thumbnail()) {
-      $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
-    } else {
-      $image = catchFirstImage();
-    } ?>
+<?php if ( has_post_thumbnail()) {
+  $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+} else {
+  $image = catchFirstImage();
+} ?>
     <?php the_field('type_label');?>
     <?php the_field('course_type');?>
     <?php the_field('type_color');?>

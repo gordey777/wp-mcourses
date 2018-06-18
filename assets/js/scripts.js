@@ -7898,32 +7898,24 @@ jQuery(document).ready(function($) {
     return false;
   });
 
-  //TABS
-  $('.price-tab:not(.active)').fadeOut();
-  $('.price--nav_item').click(function(event) {
-
-    var target = $(this).attr('href');
-    console.log(target);
-    $(target).siblings('.price-tab').removeClass('active').fadeOut();
-    $(target).addClass('active').fadeIn(400);
-
-    $(this).addClass('active');
-    $(this).siblings('a').removeClass('active');
-    return false;
-  });
 
 
 
-  $('.recommend-slider').owlCarousel({
+
+  $('.tab-item-slider').each(function(index, el) {
+
+
+  $(this).owlCarousel({
     //items: 2,
-    loop: true,
+    rewind: true,
+    //loop: true,
     //navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
     navText: ['', ''],
     autoplay: true,
     autoplayTimeout: 5000,
     autoplayHoverPause: true,
-    margin: 30,
-    dots: false,
+    margin: 20,
+    dots: true,
     responsive: {
       0: {
         items: 1
@@ -7936,18 +7928,30 @@ jQuery(document).ready(function($) {
         items: 3
       },
       992: {
-        nav: true,
+        //nav: true,
         items: 3
       },
       1200: {
-        nav: true,
-        items: 4
+        //nav: true,
+        items: 3
       }
     }
   });
+  });
 
+  //TABS
+  $('.tab-item:not(.active)').fadeOut();
+  $('.tab-nav-item').click(function(event) {
 
+    var target = $(this).attr('href');
+    console.log(target);
+    $(target).siblings('.tab-item').removeClass('active').fadeOut();
+    $(target).addClass('active').fadeIn(400);
 
+    $(this).addClass('active');
+    $(this).siblings('a').removeClass('active');
+    return false;
+  });
   //MOB menu
 
   $(function() {
@@ -8176,10 +8180,10 @@ function scrollActive() {
         var activeIthem = jQuery('.scroll a[ href = "/' + arrMenu[i] + '"]');
 
         activeIthem.parent('li').addClass('active');
-        console.log('yyyyeee');
+        //console.log('yyyyeee');
       } else {
         var activeIthem = jQuery('.scroll a[ href = "/' + arrMenu[i] + '"]');
-        console.log('aaaaa');
+        //console.log('aaaaa');
         activeIthem.parent('li').removeClass('active');
       }
     }
