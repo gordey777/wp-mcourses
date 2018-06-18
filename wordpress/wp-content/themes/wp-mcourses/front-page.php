@@ -220,6 +220,52 @@
   </section>
 <?php endif; ?>
 
+<div class="container bottom-shadow"></div>
+
+
+
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="section-title col-12"><?php the_field('about_title'); ?></div>
+        <div class="page-content col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+          <?php the_field('about_content'); ?>
+          <?php if( have_rows('about_adv') ): ?>
+            <div class="about-adv row">
+              <?php while( have_rows('about_adv') ):
+                the_row();
+                $icon = get_sub_field('icon'); ?>
+              <div class="about-adv-item col-sm-4">
+                <div class="icon" style="background-image: url(<?php echo $icon; ?>);"></div>
+                <div class="title"><?php the_sub_field('title'); ?></div>
+                <div class="desc"><?php the_sub_field('desc'); ?></div>
+              </div>
+              <?php endwhile; ?>
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
+
+      <?php if( have_rows('about_slider') ): ?>
+        <div class="row about-advantages-wrap">
+          <div class="owl-carousel about-slider about-advantages col-lg-5 offset-lg-7 col-md-6 offset-md-6 col-sm-8 offset-sm-4">
+            <?php while( have_rows('about_slider') ):
+              the_row();
+              $icon = get_sub_field('icon'); ?>
+              <div class="about-advantages-item">
+                <div class="icon" style="background-image: url(<?php echo $icon; ?>);"></div>
+                <div class="title"><?php the_sub_field('title'); ?></div>
+                <div class="desc"><?php the_sub_field('desc'); ?></div>
+              </div>
+            <?php endwhile; ?>
+          </div>
+        </div>
+      <?php endif; ?>
+
+    </div>
+  </section>
+
 
 <section id="">
 <div class="container">

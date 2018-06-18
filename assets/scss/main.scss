@@ -102,11 +102,14 @@ picture {
 
 .bottom-shadow {
   position: relative;
-  &:before {
+  &:after {
     position: absolute;
+    z-index: 1;
     top: 100%;
     right: 0;
     left: 0;
+
+    display: inline-block;
 
     height: 90px;
 
@@ -811,12 +814,19 @@ article {
 #calendar {
   overflow: hidden;
 
+  width: 100%;
+  height: auto;
+  //margin-bottom: 100px;
   padding-top: 40px;
 
   transition: all .3s;
 
   background: url(../img/bg-raspisanie.jpg) no-repeat center top;
   background-size: cover;
+   + div.bottom-shadow {
+    height: 0;
+    margin-bottom: 90px;
+  }
 }
 
 
@@ -1134,6 +1144,231 @@ article {
     }
   }
 }
+
+
+#about {
+  //overflow: hidden;
+  margin-bottom: 50px;
+
+  transition: all .3s;
+  text-align: center;
+
+  background: url(../img/bg-about.jpg) no-repeat center;
+  background-size: cover;
+  .page-content {
+    font-size: 21px;
+
+    position: relative;
+
+    padding-bottom: 40px;
+    &:before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      display: inline-block;
+
+      width: 100%;
+      height: 25px;
+
+      content: '';
+      pointer-events: none;
+
+      background: url(../img/decor-border.png) no-repeat center bottom;
+      background-size: contain;
+    }
+    p {
+      margin-bottom: 30px;
+    }
+  }
+  .container {
+
+
+    padding-bottom: 60px;
+
+  }
+}
+
+.about-adv {
+  //
+}
+.about-adv-item {
+  .icon {
+    display: inline-block;
+
+    width: 100%;
+    height: 90px;
+    margin-bottom: 30px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .title {
+    font-size: 67px;
+    font-weight: 500;
+
+    display: inline-block;
+
+    width: 100%;
+
+    color: $orange;
+  }
+  .desc {
+    font-size: 21px;
+
+    display: inline-block;
+
+    width: 100%;
+
+    text-transform: uppercase;
+  }
+}
+
+.about-slider {
+  padding-bottom: 60px;
+  .owl-stage-outer {
+    background: #fff;
+    box-shadow: $base-box-shadow;
+  }
+  .owl-stage {
+    display: flex;
+
+    margin: 0 auto;
+
+    flex-flow: row wrap;
+    align-items: stretch;
+  }
+  .about-advantages-item {
+    min-height: 100%;
+  }
+  .owl-dots {
+    position: absolute;
+    z-index: 3;
+    bottom: 5px;
+    left: 0;
+
+    width: 100%;
+    height: 30px;
+
+    text-align: center;
+    .owl-dot {
+      width: 25px;
+      height: 25px;
+      margin: 0 5px;
+
+      opacity: .8;
+      border: 1px solid $gray-dark;
+      border-radius: 50%;
+      outline: 0;
+      background: $gray-medium;
+      &:first-child {
+        margin-left: auto;
+      }
+      &:last-child {
+        margin-right: auto;
+      }
+      &:hover,
+      &.active {
+        border-color: $orange;
+        background: $orange;
+      }
+      &:hover {
+        opacity: 1;
+      }
+      &:active,
+      &:focus,
+      &:hover {
+        outline: 0;
+      }
+    }
+  }
+}
+
+.about-advantages-wrap {
+  padding-top: 30%;
+      position: relative;
+    z-index: 2;
+    &:before {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      bottom: 0;
+      left: -5%;
+
+      display: inline-block;
+
+      width: 80%;
+
+      content: '';
+      pointer-events: none;
+
+      background: url(../img/bg-about-foto.png) no-repeat center bottom;
+      background-size: auto 100%;
+    }
+}
+
+
+.about-advantages-item {
+  display: inline-block;
+
+  width: 100%;
+  padding: 30px 20px;
+
+  background: #fff;
+  .icon {
+    display: inline-block;
+
+    width: 100%;
+    height: 45px;
+    margin-bottom: 20px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  .title {
+    font-size: 28px;
+    font-weight: 500;
+
+    position: relative;
+
+    display: inline-block;
+
+    width: 100%;
+    margin-bottom: 25px;
+    padding-bottom: 30px;
+
+    text-transform: uppercase;
+
+    color: $green;
+    &:before {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+
+      display: inline-block;
+
+      width: 130px;
+      height: 25px;
+      margin: 0 -65px;
+
+      content: '';
+      pointer-events: none;
+
+      background: url(../img/decor-title-big.png) no-repeat center bottom;
+      background-size: contain;
+    }
+  }
+  .desc {
+    display: inline-block;
+
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}
+
+
 
 
 
