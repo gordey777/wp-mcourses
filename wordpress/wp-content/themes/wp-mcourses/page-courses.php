@@ -4,36 +4,45 @@ Template Name: Courses Page
 Template Post Type: page
 */
 get_header(); ?>
-<?php $front__id = (int)(get_option( 'page_on_front' )); ?>
-  <?php if (have_posts()): while (have_posts()) : the_post(); ?>
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php if (have_posts()): while (have_posts()) : the_post(); ?>
+<article id="post-<?php the_ID(); ?>" <?php post_class('container'); ?>>
+  <div class="row"></div>
 
-      <h1 class="single-title inner-title"><?php the_title(); ?></h1>
-      <?php if ( has_post_thumbnail()) :?>
-        <a class="single-thumb" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-          <?php the_post_thumbnail(); // Fullsize image for the single post ?>
-        </a>
-      <?php endif; ?><!-- /post thumbnail -->
 
-      <span class="date"><?php the_time('d F Y'); ?> <?php the_time('H:i'); ?></span>
-      <span class="author"><?php _e( 'Published by', 'wpeasy' ); ?> <?php the_author_posts_link(); ?></span>
-      <span class="comments"><?php comments_popup_link( __( 'Leave your thoughts', 'wpeasy' ), __( '1 Comment', 'wpeasy' ), __( '% Comments', 'wpeasy' )); ?></span><!-- /post details -->
-
+      <h1 class="page-title inner-title"><?php the_title(); ?></h1><?php edit_post_link(); ?>
       <?php the_content(); ?>
 
-      <?php the_tags( __( 'Tags: ', 'wpeasy' ), ', ', '<br>'); // Separated by commas with a line break at the end ?>
 
-      <p><?php _e( 'Categorised in: ', 'wpeasy' ); the_category(', '); // Separated by commas ?></p>
 
-      <p><?php _e( 'This post was written by ', 'wpeasy' ); the_author(); ?></p>
+  <div class="row">
+  <?php $front__id = (int)(get_option( 'page_on_front' )); ?>
 
-      <?php edit_post_link(); ?>
+    <?php //get_page_template_slug( get_the_ID() );?>
+            <?php $post__id = get_the_ID();
+            if ( has_post_thumbnail()) {
+              $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+            } else {
+              $image = catchFirstImage();
+            }
+            $icon = get_field('type_icon'); ?>
 
-      <?php comments_template(); ?>
+            <div class="looper-wrap col-lg-4 col-sm-6">
+              <div class="looper-item <?php the_field('type_color', $termACF);?>">
 
+                <div class="looper-img col-12 ratio" data-hkoef=".6" style="background-image: url(<?php echo $image; ?>);"></div>
+
+                <div class="looper-content-wrap col-12">
+
+                  <div class="looper-title"><?php the_title(); ?></div>
+                  <div class="looper-content">
+                    <button class="btn">Записатся</button>
+                    <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      </div>
     </article>
-  <?php endwhile; endif; ?>
-
-  <?php get_sidebar(); ?>
-
+<?php endwhile; endif; ?>
 <?php get_footer(); ?>

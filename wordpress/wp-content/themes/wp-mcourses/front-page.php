@@ -69,7 +69,7 @@
         <div class="clearfix"></div>
 
         <?php else: ?>
-          <div class="course-item-wrap col-sm-6">
+          <div class="course-item-wrap col-md-6">
             <div class="course-item <?php the_field('type_color', $termACF);?>">
 
               <div class="course-img col-12 ratio" data-hkoef=".6" style="background-image: url(<?php echo $image; ?>);"></div>
@@ -266,97 +266,174 @@
     </div>
   </section>
 
+  <?php $masageList = get_field('home_masages_list');
+  if( $masageList ): ?>
+    <section id="masages">
+      <div class="container">
+        <div class="row">
+          <div class="section-title col-12"><?php the_field('home_masages_list_title');?><span class="subtitle"><?php the_field('home_masages_list_subitle');?></span></div>
+        </div>
+        <div class="row courses-list">
+          <?php foreach($masageList as $post): ?>
+            <?php setup_postdata($post);
 
-<section id="">
-<div class="container">
-<?php the_field('home_masages_list_title');?>
-<?php the_field('home_masages_list_subitle');?>
+              $post__id = get_the_ID();
+              if ( has_post_thumbnail()) {
+                $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+              } else {
+                $image = catchFirstImage();
+              }
+              $icon = get_field('type_icon'); ?>
 
-<?php $masageList = get_field('home_masages_list');
-if( $masageList ): ?>
-  <div class="row courses-wrap">
-      <?php foreach( $courseList as $post): ?>
-      <?php setup_postdata($post);
+              <div class="looper-wrap col-lg-4 col-sm-6">
+                <div class="looper-item <?php the_field('type_color', $termACF);?>">
 
+                  <div class="looper-img col-12" data-hkoef=".6" style="background-image: url(<?php echo $image; ?>);"></div>
 
-      $image = get_sub_field('image');
-      $icon = get_sub_field('icon'); ?>
+                  <div class="looper-content-wrap col-12">
 
-      <?php //the_sub_field('');?>
-
-
-
-    <?php endforeach; ?>
-    <?php wp_reset_postdata(); ?>
-  </div>
-<?php endif; ?>
-</div>
-</section>
+                    <div class="looper-title"><?php the_title(); ?></div>
+                    <div class="looper-content">
+                      <button class="btn">Записатся</button>
+                      <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <?php endforeach; ?>
+          <?php wp_reset_postdata(); ?>
+        </div>
+        <div class="more-btn-wrap">
+          <a href="<?php the_permalink(); ?>" class="btn btn-violet more-btn"><?php the_field('home_masages_link_label');?></a>
+        </div>
+      </div>
+    </section>
+  <?php endif; ?>
 
   <section id="home_content" class="home-content">
+    <article id="post-<?php the_ID(); ?>" <?php post_class('container'); ?>>
+      <div class="row">
+        <div class="section-title col-12"><?php the_field('home_content_title');?><?php edit_post_link(); ?></div>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('container'); ?>>
-  <div class="row">
+        <div class="col-md-6 page-content"><?php the_content(); ?></div>
 
-<div class="content-title col-12">
-  <?php the_field('home_content_title');?></div>
+        <div class="col-md-6">
+          <?php $front_video = get_field('home_content_video'); ?>
+          <?php if($front_video){ ?>
+            <div class="home-video--item">
+                <div class="videoholder" data-video="<?php echo $front_video['vid']; ?>" style="background-image: url(<?php echo $front_video['thumbs']['maximum']["url"]; ?>);">
+                  <div class="video-title"><?php echo $front_video["title"]; ?></div>
+                </div>
+            </div>
+          <?php } ?>
+          <div class="content-slogan">
+            <?php the_field('header_slogan');?>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
 
-  <div class="col-md-6"><?php the_content(); ?><?php edit_post_link(); ?>
-  </div>
-  <div class="col-md-6">
-  <div class="home-video--item  ratio" data-hkoef=".55">
-    <?php $front_video = get_field('home_content_video'); ?>
+  <?php $newsList = get_field('home_news_list');
+  if( $newsList ): ?>
+    <section id="news">
+      <div class="container">
+        <div class="row">
+          <div class="section-title col-12"><?php the_field('home_news_title');?></div>
+        </div>
+        <div class="row news-list">
+          <?php foreach($newsList as $post): ?>
+            <?php setup_postdata($post);
+              $post__id = get_the_ID();
+              if ( has_post_thumbnail()) {
+                $image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+              } else {
+                $image = catchFirstImage();
+              }
+              $icon = get_field('type_icon'); ?>
+              <div class="looper-wrap col-lg-4 col-sm-6">
+                <div class="looper-item blog-item <?php the_field('type_color', $termACF);?>">
+
+                  <div class="looper-img col-12" data-hkoef=".6" style="background-image: url(<?php echo $image; ?>);"></div>
+
+                  <div class="looper-content-wrap col-12">
+
+                    <div class="looper-title"><?php the_title(); ?></div>
+                    <div class="looper-content">
+                      <div class="looper-post-date"><?php the_time('j F | Y'); ?></div>
+                      <div class="looper-desc"><?php wpeExcerpt('wpeExcerpt30'); ?></div>
+                      <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <?php endforeach; ?>
+          <?php wp_reset_postdata(); ?>
+        </div>
+        <div class="more-btn-wrap">
+          <a href="<?php the_permalink(); ?>" class="btn btn-violet more-btn"><?php the_field('home_masages_link_label');?></a>
+        </div>
+      </div>
+    </section>
+  <?php endif; ?>
+
+  <section id="contact-form">
+    <div class="container bottom-shadow">
+      <div class="row">
+          <div class="section-title col-12"><?php the_field('cont_form_title');?></div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-6">
+          <?php $contform = get_field('home_cont_form');?>
+          <?php  the_field('cont_form_content');?>
+          <?php echo do_shortcode($contform);?>
 
 
-    <?php //echo $front_video["iframe"]; ?>
-    <div class="videoholder" data-video="<?php echo $front_video['vid']; ?>" style="background-image: url(<?php echo $front_video['thumbs']['maximum']["url"]; ?>);">
-      <div class="video-title"><?php echo $front_video["title"]; ?></div>
+        </div>
+
+      </div>
     </div>
-  </div>
+  </section>
 
-    <?php the_field('header_slogan');?>
-  </div>
-  </div>
-</article>
+  <section id="contacts">
+    <div class="container">
+      <div class="row">
+        <div class="section-title col-12"><?php the_field('contacts_title');?></div>
+
+      </div>
+    </div>
+    <div class="home-contacts--map">
+      <?php $location = get_field('contacts_map');
+      if( !empty($location) ): ?>
+        <div class="acf-map">
+          <div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>"></div>
+        </div>
+      <?php endif; ?>
+      <div class="container bottom-shadow">
+        <div class="row">
+          <div class="col-lg-4 col-md-5">
+            <div class="map-contacts">
+              <div class="contacts-title"><?php the_field('contacts_list_title');?></div>
+              <div class="contact-item-wrap phone">
+                <div class="contact-label"><?php the_field('header_phone_label');?></div>
+                <a href="tel:+<?php echo preg_replace("/[^0-9]/", '', get_field('header_phone')); ?>" class="contact-item"><?php the_field('header_phone');?></a>
+              </div>
+              <div class="contact-item-wrap address">
+                <div class="contact-label"><?php the_field('footer_address_label');?></div>
+                <div class="contact-item"><?php the_field('footer_address');?></div>
+              </div>
+              <div class="contact-item-wrap schedule">
+                <div class="contact-label"><?php the_field('schedule_label');?></div>
+                <div class="contact-item"><?php the_field('schedule');?></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div><!-- /.home-contacts--map -->
+
+  </section>
 <?php endwhile; endif; ?>
-
-<?php $contform = get_field('home_cont_form');?>
-
-  </section>
-
-
-
-  <section id="home_schedule" class="schedule">
-
-  </section>
-  <section id="home_schedule" class="schedule">
-
-  </section>
-  <section id="kontacts" class="schedule">
-
-  <div class="home-contacts--map col-12">
-    <?php $location = get_field('contacts_map');
-    if( !empty($location) ): ?>
-    <div class="map-contacts">
-      <div class="contact-item-wrap">
-        <div class="contact-label"><?php the_field('header_phone_label');?></div>
-        <div class="contact-item"><?php the_field('header_phone');?></div>
-      </div>
-      <div class="contact-item-wrap">
-        <div class="contact-label"><?php the_field('footer_address_label');?></div>
-        <div class="contact-item"><?php the_field('footer_address');?></div>
-      </div>
-      <div class="contact-item-wrap">
-        <div class="contact-label"><?php the_field('schedule_label');?></div>
-        <div class="contact-item"><?php the_field('schedule');?></div>
-      </div>
-    </div>
-
-    <div class="acf-map">
-      <div class="marker" data-lat="<?php echo $location['lat']; ?>" data-lng="<?php echo $location['lng']; ?>"></div>
-    </div>
-
-  </div><!-- /.home-contacts--map -->
-  </section>
-    <?php endif; ?>
 <?php get_footer(); ?>
