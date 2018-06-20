@@ -275,6 +275,9 @@ function wpeExcerpt10($length) {
 function wpeExcerpt20($length) {
   return 20;
 }
+function wpeExcerpt30($length) {
+  return 30;
+}
 function wpeExcerpt40($length) {
   return 40;
 }
