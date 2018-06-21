@@ -1,9 +1,6 @@
 <?php if (have_posts()): while (have_posts()) : the_post(); ?>
   <?php $front__id = (int)(get_option( 'page_on_front' )); ?>
 
-  <?php if (have_posts()): while (have_posts()) : the_post(); ?>
-<?php //get_page_template_slug( get_the_ID() );?>
-
 
             <?php $post__id = get_the_ID();
             if ( has_post_thumbnail()) {

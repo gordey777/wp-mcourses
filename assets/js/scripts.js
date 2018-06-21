@@ -7886,7 +7886,7 @@ jQuery(document).ready(function($) {
 
 
   //$('.lds-ring').fadeOut(400);
-
+  //video
   $(document).on('click', '.videoholder', function(e) {
     //$(this).addClass('play');
     video = '<iframe src="https://www.youtube.com/embed/' + $(this).data('video') + '?autoplay=1" frameborder="0" allowfullscreen=""></iframe>';
@@ -7894,11 +7894,34 @@ jQuery(document).ready(function($) {
   });
 
 
-  $('.menu-item a[href$="#"]').click(function(event) {
-    return false;
+  // $('.menu-item a[href$="#"]').click(function(event) {
+  //   return false;
+  // });
+
+  $('.sertif-slider').owlCarousel({
+
+    rewind: true,
+
+    navText: ['', ''],
+    autoplay: true,
+    autoplayTimeout: 5000,
+    autoplayHoverPause: true,
+    margin: 0,
+    dots: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      560: {
+        items: 2
+      },
+      768: {
+
+        items: 2
+      },
+
+    }
   });
-
-
 
   $('.about-slider').owlCarousel({
     items: 1,
@@ -8012,117 +8035,18 @@ jQuery(document).ready(function($) {
   });
 
 
-  //girls more
-  $('.pic--descr-more').click(function(event) {
-    $(this).siblings('.pic--descr').toggleClass('open')
-    $(this).toggleClass('open')
-
-  });
-
-
-  $('.services-content-more').click(function(event) {
-
-    $(this).siblings('.services-content').toggleClass('open')
-    $(this).toggleClass('open')
-
-  });
-
-  //gallery more
-  $('#loadMoreImages').click(function(event) {
-    loadMoreImages();
-  });
-  $('#loadMoreVideos').click(function(event) {
-    loadMoreVideos();
-  });
 
 
   autoRatio();
 
 
 
-  //ajax modal forms
-  $('.ajax-order').click(function(event) {
-    var formcode = $(this).data('formcode'),
-      formtarg = $(this).data('formtarg');
-    ajaxModalForm(formcode, formtarg);
+//button data to form
+
+  $('.btn-order').click(function(event) {
+    var formtarg = $(this).data('formtarg');
+    $('#modal-order-target').val(formtarg);
   });
-
-
-  function loadMoreImages() {
-    var start_number = $('#images_gallery .gallery--item').length,
-      page___id = $('#gallery_title').data('pageid'),
-      data = {
-        action: 'gallery_ajax',
-        page___id: page___id,
-        startnumber: start_number,
-      };
-    $.ajax({
-      url: adminAjax['ajaxurl'],
-      data: data,
-      type: 'POST',
-      beforeSend: function(xhr) {},
-      success: function(data) {
-        $('#images_gallery #loadMoreImages').before(data);
-        $('#images_gallery #loadMoreImages').remove();
-        autoRatio();
-      }
-    });
-
-
-
-
-
-  }
-
-
-  function loadMoreVideos() {
-    var start_video = $('#video_gallery .gallery-video--item').length,
-      page___id = $('#gallery_title').data('pageid'),
-      data = {
-        action: 'gallery_videos_ajax',
-        page___id: page___id,
-        startvideo: start_video,
-      };
-    $.ajax({
-      url: adminAjax['ajaxurl'],
-      data: data,
-      type: 'POST',
-      beforeSend: function(xhr) {},
-      success: function(data) {
-        $('#video_gallery #loadMoreVideos').before(data);
-        $('#video_gallery #loadMoreVideos').remove();
-        autoRatio();
-      }
-    });
-  }
-
-
-  function ajaxModalForm($formcode, $formtarg) {
-    var data = {
-      action: 'modal_form_ajax',
-      formcode: $formcode,
-      formtarg: $formtarg,
-    };
-    $.ajax({
-      url: adminAjax['ajaxurl'],
-      data: data,
-      type: 'POST',
-      beforeSend: function(xhr) {
-        $('#modal_form_body').html('');
-      },
-      success: function(data) {
-        // console.log(data);
-        $('#modal_form_body').html(data);
-        setTimeout(function() {
-          $('#modal-form-target').val($formtarg);
-
-        }, 1000);
-        reinitCF7();
-      }
-    });
-  }
-
-
 
 
 
@@ -8141,14 +8065,14 @@ jQuery(window).scroll(function() {
 }).scroll();
 
 
-function reinitCF7() {
-  (function() {
-    var wpcf7_form = document.getElementsByClassName('wpcf7-form');
-    [].forEach.call(wpcf7_form, function(form) {
-      wpcf7.initForm(form);
-    });
-  })();
-}
+// function reinitCF7() {
+//   (function() {
+//     var wpcf7_form = document.getElementsByClassName('wpcf7-form');
+//     [].forEach.call(wpcf7_form, function(form) {
+//       wpcf7.initForm(form);
+//     });
+//   })();
+// }
 
 
 function autoRatio() {

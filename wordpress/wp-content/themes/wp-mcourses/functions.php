@@ -168,7 +168,7 @@ function wpeHeadNav() {
     'after'           => '',
     'link_before'     => '',
     'link_after'      => '',
-    'items_wrap'      => '<ul class="headnav">%3$s</ul>',
+    'items_wrap'      => '<ul class="headnav mob-nav">%3$s</ul>',
     'depth'           => 0,
     'walker'          => ''
     )
@@ -190,7 +190,7 @@ function wpeLangNav() {
     'after'           => '',
     'link_before'     => '',
     'link_after'      => '',
-    'items_wrap'      => '<ul class="header--lang">%3$s</ul>',
+    'items_wrap'      => '<ul class="header--lang mob-nav">%3$s</ul>',
     'depth'           => 0,
     'walker'          => ''
     )
@@ -793,40 +793,50 @@ class FilterPagesByTemplate {
   }
 }//end class
 
+/**
+ * WP: Unwrap images from <p> tag
+ * @param $content
+ * @return mixed
+ */
+function so226099_filter_p_tags_on_images( $content ) {
+    $content = preg_replace('/<p>\\s*?(<a .*?><img.*?><\\/a>|<img.*?>)?\\s*<\\/p>/s', '\1', $content);
+
+    return $content;
+}
+add_filter('the_content', 'so226099_filter_p_tags_on_images');
 
 
 
-
-/*function social_sharing_buttons() {
-  global $post;
-
-
-      //wpeExcerpt('wpeExcerpt20');
-    $shareURL = urlencode(get_permalink());
-    $shareTitle = str_replace( ' ', '%20', get_the_title());
-    $shareCont = str_replace( ' ', '%20', shareExcerpt(10));
-    $shareThumbnail = get_the_post_thumbnail_url( $post->ID );
-
-    $vkURL = 'http://vk.com/share.php?url=' . $shareURL.'&title=' . $shareTitle . '&description=' . $shareCont . '&image='. $shareThumbnail .'&noparse=true';
-    $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$shareURL;
-    $twitterURL = 'https://twitter.com/intent/tweet?text='.$shareTitle.'&url='.$shareURL.'&via=Crunchify';
-    $googleURL = 'https://plus.google.com/share?url='.$shareURL;
-    $instaURL = 'https://plus.google.com/share?url='.$shareURL;
+// function social_sharing_buttons() {
+//   global $post;
 
 
+//       //wpeExcerpt('wpeExcerpt20');
+//     $shareURL = urlencode(get_permalink());
+//     $shareTitle = str_replace( ' ', '%20', get_the_title());
+//     $shareCont = str_replace( ' ', '%20', shareExcerpt(10));
+//     $shareThumbnail = get_the_post_thumbnail_url( $post->ID );
 
-    $content = '';
-    $content .= '<div class="social-share">';
-    $content .= '<a class="shared-link fa fa-vk" href="'.$vkURL.'" target="_blank" title=""></a>';
-    $content .= '<a class="shared-link fa fa-facebook" href="' . $facebookURL .'" target="_blank" title=""></a>';
-    $content .= '<a class="shared-link fa fa-twitter" href="'. $twitterURL .'" target="_blank"></a>';
-    $content .= '<a class="shared-link fa fa-google-plus" href="' . $googleURL . '" target="_blank"></a>';
-    $content .= '<a class="shared-link fa fa-instagram" href="'. $instaURL .'" target="_blank"></a>';
-    $content .= '</div>';
+//     $vkURL = 'http://vk.com/share.php?url=' . $shareURL.'&title=' . $shareTitle . '&description=' . $shareCont . '&image='. $shareThumbnail .'&noparse=true';
+//     $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$shareURL;
+//     $twitterURL = 'https://twitter.com/intent/tweet?text='.$shareTitle.'&url='.$shareURL;
+//     $googleURL = 'https://plus.google.com/share?url='.$shareURL;
+//     $instaURL = 'https://plus.google.com/share?url='.$shareURL;
 
-    echo $content;
 
-};*/
+
+//     $content = '';
+//     $content .= '<div class="social-share">';
+//     $content .= '<a class="shared-link fa fa-vk" href="'.$vkURL.'" target="_blank" title=""></a>';
+//     $content .= '<a class="shared-link fa fa-facebook" href="' . $facebookURL .'" target="_blank" title=""></a>';
+//     $content .= '<a class="shared-link fa fa-twitter" href="'. $twitterURL .'" target="_blank"></a>';
+//     $content .= '<a class="shared-link fa fa-google-plus" href="' . $googleURL . '" target="_blank"></a>';
+//     $content .= '<a class="shared-link fa fa-instagram" href="'. $instaURL .'" target="_blank"></a>';
+//     $content .= '</div>';
+
+//     echo $content;
+
+// };
 
 
 ?>
