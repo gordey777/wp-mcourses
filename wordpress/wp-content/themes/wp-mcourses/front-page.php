@@ -1,18 +1,16 @@
 <?php /* Template Name: Home Page */ get_header(); ?>
 <?php if (have_posts()): while (have_posts()) : the_post(); ?>
-
+<?php $front__id = (int)(get_option( 'page_on_front' )); ?>
 
 
 <section id="introduction">
+
   <div class="container">
     <div class="row int-content">
-        <div class="int-title col-12"><?php the_field('home_courses_title');?></div>
+        <h1 class="int-title col-12"><?php the_field('home_courses_title');?></h1>
         <div class="int-desc col-lg-8 offset-lg-2"><?php the_field('home_courses_desc');?></div>
         <div class="int-small-desc col-lg-10 offset-lg-1"><?php the_field('home_courses_small_desc');?></div>
     </div>
-
-
-
 
   <?php $courseList = get_field('home_courses_list');
 
@@ -58,8 +56,8 @@
                       <div class="value"><?php the_field('duration');?></div>
                       <div class="units"><?php the_field('duration_unit');?></div>
                     </div>
-                    <button class="btn">Записатся</button>
-                    <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
+                    <button class="btn btn-order" data-toggle="modal" data-target="#orderFormModal" data-formtarg="<?php the_title(); ?>"><?php the_field('label_order', $front__id); ?></button>
+                    <a href="<?php the_permalink(); ?>" class="btn more-link"><?php the_field('label_more', $front__id); ?></a>
                   </div>
                 </div>
               </div>
@@ -94,8 +92,8 @@
                       <div class="value"><?php the_field('duration');?></div>
                       <div class="units"><?php the_field('duration_unit');?></div>
                     </div>
-                    <button class="btn">Записатся</button>
-                    <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
+                    <button class="btn btn-order" data-toggle="modal" data-target="#orderFormModal" data-formtarg="<?php the_title(); ?>"><?php the_field('label_order', $front__id); ?></button>
+                    <a href="<?php the_permalink(); ?>" class="btn more-link"><?php the_field('label_more', $front__id); ?></a>
                   </div>
                 </div>
               </div>
@@ -222,13 +220,10 @@
 
 <div class="container bottom-shadow"></div>
 
-
-
-
   <section id="about">
     <div class="container">
       <div class="row">
-        <div class="section-title col-12"><?php the_field('about_title'); ?></div>
+        <h2 class="section-title col-12"><?php the_field('about_title'); ?></h2>
         <div class="page-content col-lg-8 offset-lg-2 col-md-10 offset-md-1">
           <?php the_field('about_content'); ?>
           <?php if( have_rows('about_adv') ): ?>
@@ -294,8 +289,8 @@
 
                     <div class="looper-title"><?php the_title(); ?></div>
                     <div class="looper-content">
-                      <button class="btn">Записатся</button>
-                      <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
+                      <button class="btn btn-order" data-toggle="modal" data-target="#orderFormModal" data-formtarg="<?php the_title(); ?>"><?php the_field('label_order', $front__id); ?></button>
+                      <a href="<?php the_permalink(); ?>" class="btn more-link"><?php the_field('label_more', $front__id); ?></a>
                     </div>
                   </div>
                 </div>
@@ -304,7 +299,8 @@
           <?php wp_reset_postdata(); ?>
         </div>
         <div class="more-btn-wrap">
-          <a href="<?php the_permalink(); ?>" class="btn btn-violet more-btn"><?php the_field('home_masages_link_label');?></a>
+          <?php $massages_id = get_field('home_masages_link') ;?>
+          <a href="<?php echo get_the_permalink( $massages_id ); ?>" class="btn btn-violet more-btn"><?php the_field('home_masages_link_label');?></a>
         </div>
       </div>
     </section>
@@ -313,7 +309,7 @@
   <section id="home_content" class="home-content">
     <article id="post-<?php the_ID(); ?>" <?php post_class('container'); ?>>
       <div class="row">
-        <div class="section-title col-12"><?php the_field('home_content_title');?><?php edit_post_link(); ?></div>
+        <h2 class="section-title col-12"><?php the_field('home_content_title');?><?php edit_post_link(); ?></h2>
 
         <div class="col-md-6 page-content"><?php the_content(); ?></div>
 
@@ -362,7 +358,7 @@
                     <div class="looper-content">
                       <div class="looper-post-date"><?php the_time('j F | Y'); ?></div>
                       <div class="looper-desc"><?php wpeExcerpt('wpeExcerpt30'); ?></div>
-                      <a href="<?php the_permalink(); ?>" class="btn more-link">Подробнее</a>
+                      <a href="<?php the_permalink(); ?>" class="btn more-link"><?php the_field('label_more', $front__id); ?></a>
                     </div>
                   </div>
                 </div>
@@ -371,7 +367,9 @@
           <?php wp_reset_postdata(); ?>
         </div>
         <div class="more-btn-wrap">
-          <a href="<?php the_permalink(); ?>" class="btn btn-violet more-btn"><?php the_field('home_masages_link_label');?></a>
+          <?php $news_id = (get_field('home_news_link')) ;?>
+
+          <a href="<?php echo get_term_link( $news_id ); ?>" class="btn btn-violet more-btn"><?php the_field('home_news_link_label');?></a>
         </div>
       </div>
     </section>

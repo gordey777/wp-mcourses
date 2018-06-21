@@ -5,35 +5,71 @@ Template Post Type: page
 */
 get_header(); ?>
 <?php $front__id = (int)(get_option( 'page_on_front' )); ?>
-  <?php if (have_posts()): while (have_posts()) : the_post(); ?>
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-      <h1 class="single-title inner-title"><?php the_title(); ?></h1>
-      <?php if ( has_post_thumbnail()) :?>
-        <a class="single-thumb" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-          <?php the_post_thumbnail(); // Fullsize image for the single post ?>
-        </a>
-      <?php endif; ?><!-- /post thumbnail -->
+<?php if (have_posts()): while (have_posts()) : the_post(); ?>
+  <?php $post__id = get_the_ID(); ?>
 
-      <span class="date"><?php the_time('d F Y'); ?> <?php the_time('H:i'); ?></span>
-      <span class="author"><?php _e( 'Published by', 'wpeasy' ); ?> <?php the_author_posts_link(); ?></span>
-      <span class="comments"><?php comments_popup_link( __( 'Leave your thoughts', 'wpeasy' ), __( '1 Comment', 'wpeasy' ), __( '% Comments', 'wpeasy' )); ?></span><!-- /post details -->
+  <div class="container">
+    <div class="row">
+      <article id="post-<?php the_ID(); ?>" <?php post_class('single-page col-12'); ?>>
+        <div class="row">
+           <h1 class="section-title col-12"><?php the_title(); ?></h1><?php edit_post_link(); ?>
 
-      <?php the_content(); ?>
+           <div class="text-content col-12"><?php the_content(); ?></div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <?php if( have_rows('team_list') ):
+    $i = 0; ?>
+    <section id="team">
+      <div class="container bottom-shadow">
+        <div class="row team-list">
+          <?php while( have_rows('team_list') ):
+            the_row();
+            $img = get_sub_field('img');
+            if($i == 0 || $i == 1){
+              $wrapStyle = 'col-md-6 text-lg-left';
+              $contStyle = 'col-lg-6';
+            } else{
+              $wrapStyle = 'col-lg-3 col-md-4';
+              $contStyle = 'col-12';
+            } ?>
+            <div class="<?php echo $wrapStyle; ?> col-sm-6 team-item-wrap">
+              <div class="row team-item" style="background: <?php the_sub_field('color'); ?>;">
+                <div class="<?php echo $contStyle; ?> team-img ratio" data-hkoef='1.5' style="background-image: url(<?php echo $img['sizes']['medium']; ?>);"></div>
+                <div class="<?php echo $contStyle; ?> team-cont">
+                  <div class="team-name"><?php the_sub_field('name'); ?></div>
+                  <div class="team-sename"><div class="neme-decor"><?php the_sub_field('sename'); ?></div></div>
+                  <div class="team-desc"><?php the_sub_field('desc'); ?></div>
+                </div>
+              </div>
+            </div>
+          <?php $i++;
+          endwhile; ?>
+          <div class="team-quote col-lg-6">
+            <blockquote><?php the_field('team_quote'); ?></blockquote>
+            <div class="tq-autor"><?php the_field('team_quote_autor'); ?></div>
+            <div class="tq-desc"><?php the_field('tqa_desc'); ?></div>
+          </div>
 
-      <?php the_tags( __( 'Tags: ', 'wpeasy' ), ', ', '<br>'); // Separated by commas with a line break at the end ?>
+        </div>
+      </div>
+    </section>
+  <?php endif; ?>
 
-      <p><?php _e( 'Categorised in: ', 'wpeasy' ); the_category(', '); // Separated by commas ?></p>
-
-      <p><?php _e( 'This post was written by ', 'wpeasy' ); the_author(); ?></p>
-
-      <?php edit_post_link(); ?>
-
-      <?php comments_template(); ?>
-
-    </article>
-  <?php endwhile; endif; ?>
-
-  <?php get_sidebar(); ?>
+<?php endwhile; endif; ?>
 
 <?php get_footer(); ?>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -38,12 +38,13 @@ button {
   &:hover,
   &:focus {
     color: #fff;
+    outline: none;
     background-position: 0 0;
-
     //background: $green-hover-gradient;
   }
   &:active {
     color: lighten($action-color, 15%);
+    outline: none;
   }
   &:disabled {
     cursor: not-allowed;
@@ -63,8 +64,6 @@ button {
 }
 
 
-
-
 .callback {
   display: inline-block;
 
@@ -77,7 +76,10 @@ button {
   background: url(../img/ico-phone.png) no-repeat center center, $green;
   background-size: 70% auto;
   box-shadow: 0 2px 5px -1px rgba(#ccc, .7), inset 0 2px 5px -1px rgba(#000, .6);
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
+    background-size: 75% auto;
     background-position: center center;
     box-shadow: 0 2px 5px -2px rgba(#000, .4), inset 0 2px 4px -1px rgba(#fff, .4);
   }
