@@ -25,7 +25,7 @@ $humb-bor-rad: 0;
   top: 15px;
   right: 15px;
 
-  display: block;
+  display: none;
   overflow: hidden;
 
   width: $button-width;
@@ -84,7 +84,7 @@ $humb-bor-rad: 0;
       bottom: -(($button-height / 2) - ($bar-thickness / 2) - $button-pad);
     }
   }
-/*   &:hover {
+  /*   &:hover {
   //transform: rotate(180deg);
   span {
     background: $humb-color-hov;
@@ -131,6 +131,7 @@ $humb-bor-rad: 0;
   right: 15px;
   span {
     transform: rotate(-45deg);
+
     background: $humb-color-hov;
     &:before {
       top: 0;
@@ -145,13 +146,8 @@ $humb-bor-rad: 0;
     &:before,
     &:after {
       transition-delay: 0, $button-trans-delay;
+
       background: $humb-color-hov;
     }
-  }
-}
-
-@media (min-width: 992px) {
-  .humb-toggle-switch {
-    display: none;
   }
 }

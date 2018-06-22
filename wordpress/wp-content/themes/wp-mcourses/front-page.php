@@ -34,9 +34,9 @@
           <div class="courses-first course-item row <?php the_field('type_color');?>">
 
 
-              <div class="course-img col-lg-7 col-md-6 ratio" data-hkoef=".8" style="background-image: url(<?php echo $image; ?>);"></div>
+              <div class="course-img col-xl-7 col-lg-6" data-hkoef=".8" style="background-image: url(<?php echo $image; ?>);"></div>
 
-              <div class="course-content-wrap  col-lg-5 col-md-6">
+              <div class="course-content-wrap col-xl-5 col-lg-6">
 
                 <div class="course-title">
                   <div class="course-icon" style="background-image: url(<?php echo $icon; ?>);"></div>
@@ -72,7 +72,7 @@
 
               <div class="course-img col-12 ratio" data-hkoef=".6" style="background-image: url(<?php echo $image; ?>);"></div>
 
-              <div class="course-content-wrap col-md-10 offset-md-1">
+              <div class="course-content-wrap col-lg-10 offset-lg-1">
 
                 <div class="course-title">
                   <div class="course-icon" style="background-image: url(<?php echo $icon; ?>);"></div>
@@ -131,10 +131,10 @@
           $activeClass = '';
         }
         ?>
-        <a href="#tab-<?php echo $i; ?>" class="tab-nav-item col-4 <?php echo $activeClass; ?> <?php the_sub_field('type_color'); ?>">
+        <a href="#tab-<?php echo $i; ?>" class="tab-nav-item col-md-4 <?php echo $activeClass; ?> <?php the_sub_field('type_color'); ?>">
           <div class="icon" style="background-image: url(<?php echo $icon; ?>);"></div>
-          <div class="label"><?php the_sub_field('title_label'); ?></div>
-          <div class="title"><?php the_sub_field('title'); ?></div>
+
+          <div class="title"><div class="label"><?php the_sub_field('title_label'); ?></div><?php the_sub_field('title'); ?></div>
           <div class="days">
           <?php $days = get_sub_field('days');
             if( $days ): ?>
@@ -244,7 +244,7 @@
 
       <?php if( have_rows('about_slider') ): ?>
         <div class="row about-advantages-wrap">
-          <div class="owl-carousel about-slider about-advantages col-lg-5 offset-lg-7 col-md-6 offset-md-6 col-sm-8 offset-sm-4">
+          <div class="owl-carousel about-slider about-advantages col-xl-5 offset-xl-7 col-lg-6 offset-lg-6  col-md-7 offset-md-5 col-sm-8 offset-sm-4">
             <?php while( have_rows('about_slider') ):
               the_row();
               $icon = get_sub_field('icon'); ?>
@@ -311,9 +311,9 @@
       <div class="row">
         <h2 class="section-title col-12"><?php the_field('home_content_title');?><?php edit_post_link(); ?></h2>
 
-        <div class="col-md-6 page-content"><?php the_content(); ?></div>
+        <div class="col-lg-6 page-content"><?php the_content(); ?></div>
 
-        <div class="col-md-6">
+        <div class="col-lg-6">
           <?php $front_video = get_field('home_content_video'); ?>
           <?php if($front_video){ ?>
             <div class="home-video--item">
@@ -381,7 +381,7 @@
           <div class="section-title col-12"><?php the_field('cont_form_title');?></div>
       </div>
       <div class="row">
-        <div class="col-md-6 offset-md-6">
+        <div class="col-lg-6 offset-lg-6 col-md-8 offset-md-4">
           <?php $contform = get_field('home_cont_form');?>
           <?php  the_field('cont_form_content');?>
           <?php echo do_shortcode($contform);?>

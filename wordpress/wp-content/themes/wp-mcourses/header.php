@@ -30,11 +30,10 @@
   <header role="banner">
     <div class="container bottom-shadow">
       <div class="row flex_row">
-        <div class="col-lg-3">
+        <div class="logo-wrap col-xs-3 col-lg-7 col-10">
 
 
-
-            <div class="logo col-3">
+            <div class="logo">
               <?php if ( !is_front_page() && !is_home() ){ ?>
                 <a href="<?php echo home_url(); ?>">
               <?php } ?>
@@ -43,7 +42,7 @@
                 </a>
               <?php } ?>
             </div>
-            <div class="header-slogan col-9"><?php the_field('header_slogan', $front__id);?></div>
+            <div class="header-slogan"><?php the_field('header_slogan', $front__id);?></div>
 
         </div>
         <nav class="lang-nav col-lg-1" role="navigation">
@@ -53,7 +52,7 @@
         <nav class="main-nav  col-lg-5" role="navigation">
           <?php wpeHeadNav(); ?>
         </nav>
-        <div class="head-tel col-lg-3 mob-nav">
+        <div class="head-tel col-xl-3 col-lg-5 mob-nav">
           <div class="call-wrapp col-3">
             <button title="Callback" class="btn callback" data-toggle="modal" data-target="#callbackModal"></button>
           </div>

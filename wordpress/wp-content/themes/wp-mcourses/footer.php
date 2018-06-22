@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-4">
             <div class="row">
-              <div class=" col-6 offset-3 footer-slogan-wrap">
+              <div class=" col-lg-6 offset-lg-3 footer-slogan-wrap">
                   <div class="logo">
                     <?php if ( !is_front_page() && !is_home() ){ ?>
                       <a href="<?php echo home_url(); ?>">
@@ -31,33 +31,38 @@
               <?php dynamic_sidebar( 'widgetarea1' ); ?>
             <?php endif; ?>
 
+<div class="col-md-6">
+  <div class="row">
 
-          <div class="footer-widget col-md-3 col-sm-4 col-sm-6">
-            <span class="footer-widget--title"><?php the_field('socials_title', $front__id);?></span>
 
-            <?php if( have_rows('socials', $front__id)): ?>
-              <div class="socials">
-                <?php while ( have_rows('socials', $front__id) ) : the_row(); ?>
-                  <a href="<?php the_sub_field('link'); ?>" class="social-item" title="<?php the_sub_field('title'); ?>" style="background: url(<?php the_sub_field('icon'); ?>) no-repeat center center; background-size: contain;"></a>
-                <?php endwhile; ?>
-              </div>
-            <?php endif; ?>
-          </div>
+            <div class="footer-widget col-lg-6">
+              <span class="footer-widget--title"><?php the_field('socials_title', $front__id);?></span>
 
-          <div class="footer-widget col-md-3 col-sm-4 col-sm-6">
-            <span class="footer-widget--title"><?php the_field('footer_contacts_title', $front__id);?></span>
-            <div class="footer-tel">
-              <div class="call-wrapp">
-                <button title="Callback" class="btn callback" data-toggle="modal" data-target="#callbackModal"></button>
-              </div>
-              <a href="tel:+<?php echo preg_replace("/[^0-9]/", '', get_field('header_phone', $front__id)); ?>" class="tel-link"><?php the_field('header_phone', $front__id);?></a>
+              <?php if( have_rows('socials', $front__id)): ?>
+                <div class="socials">
+                  <?php while ( have_rows('socials', $front__id) ) : the_row(); ?>
+                    <a href="<?php the_sub_field('link'); ?>" class="social-item" title="<?php the_sub_field('title'); ?>" style="background: url(<?php the_sub_field('icon'); ?>) no-repeat center center; background-size: contain;"></a>
+                  <?php endwhile; ?>
+                </div>
+              <?php endif; ?>
             </div>
-            <div class="footer-address">
-              <div class="address-icon"></div>
-              <div class="address"><?php the_field('footer_address', $front__id);?></div>
+
+            <div class="footer-widget col-lg-6">
+              <span class="footer-widget--title"><?php the_field('footer_contacts_title', $front__id);?></span>
+              <div class="footer-tel">
+                <div class="call-wrapp">
+                  <button title="Callback" class="btn callback" data-toggle="modal" data-target="#callbackModal"></button>
+                </div>
+                <a href="tel:+<?php echo preg_replace("/[^0-9]/", '', get_field('header_phone', $front__id)); ?>" class="tel-link"><?php the_field('header_phone', $front__id);?></a>
+              </div>
+              <div class="footer-address">
+                <div class="address-icon"></div>
+                <div class="address"><?php the_field('footer_address', $front__id);?></div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
     <div class="footer-cop">
