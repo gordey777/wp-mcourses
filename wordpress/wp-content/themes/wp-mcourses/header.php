@@ -30,7 +30,7 @@
   <header role="banner">
     <div class="container bottom-shadow">
       <div class="row flex_row">
-        <div class="logo-wrap col-xs-3 col-lg-7 col-10">
+        <div class="logo-wrap col-lg-3 col-md-7 col-10">
 
 
             <div class="logo">

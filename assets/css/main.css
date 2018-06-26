@@ -9196,7 +9196,7 @@ footer .footer-cop .copyright {
     display: none;
     background: rgba(0, 0, 0, 0.6);
   }
-  #mob_nav {
+  #mob_nav .head-tel {
     display: inline-block;
   }
   header .flex_row .lang-nav,

@@ -3653,7 +3653,9 @@ footer {
     background: rgba(#000, .6);
   }
   #mob_nav {
-    display: inline-block;
+    .head-tel {
+      display: inline-block;
+    }
   }
   header {
     .flex_row {
