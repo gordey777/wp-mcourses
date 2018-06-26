@@ -1,5 +1,6 @@
 /.hg
 
+*.psd
 *.log
 *.map
 *.orig
@@ -25,7 +26,8 @@ Desktop.ini
 .Spotlight-V100
 .Trashes
 
-
+src/
+src/**
 node_modules
 node_modules/**
 _gsdata_
