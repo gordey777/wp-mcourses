@@ -1,34 +1,30 @@
 <?php get_header(); ?>
 
-  <?php if (have_posts()): while (have_posts()) : the_post(); ?>
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php $front__id = (int)(get_option( 'page_on_front' )); ?>
 
-      <h1 class="single-title inner-title"><?php the_title(); ?></h1>
-      <?php if ( has_post_thumbnail()) :?>
-        <a class="single-thumb" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-          <?php the_post_thumbnail(); // Fullsize image for the single post ?>
-        </a>
-      <?php endif; ?><!-- /post thumbnail -->
+<?php if (have_posts()): while (have_posts()) : the_post(); ?>
+  <?php $post__id = get_the_ID(); ?>
 
-      <span class="date"><?php the_time('d F Y'); ?> <?php the_time('H:i'); ?></span>
-      <span class="author"><?php _e( 'Published by', 'wpeasy' ); ?> <?php the_author_posts_link(); ?></span>
-      <span class="comments"><?php comments_popup_link( __( 'Leave your thoughts', 'wpeasy' ), __( '1 Comment', 'wpeasy' ), __( '% Comments', 'wpeasy' )); ?></span><!-- /post details -->
 
-      <?php the_content(); ?>
+<div class="container">
+  <div class="row">
+    <article id="post-<?php the_ID(); ?>" <?php post_class('single-page col-lg-8'); ?>>
+      <div class="row">
+         <h1 class="section-title col-12"><?php the_title(); ?></h1><?php edit_post_link(); ?>
 
-      <?php the_tags( __( 'Tags: ', 'wpeasy' ), ', ', '<br>'); // Separated by commas with a line break at the end ?>
+         <div class="text-content col-12"><?php the_content(); ?></div>
+      </div>
 
-      <p><?php _e( 'Categorised in: ', 'wpeasy' ); the_category(', '); // Separated by commas ?></p>
-
-      <p><?php _e( 'This post was written by ', 'wpeasy' ); the_author(); ?></p>
-
-      <?php edit_post_link(); ?>
-
-      <?php comments_template(); ?>
 
     </article>
+
+    <?php get_sidebar(); ?>
+
+  </div>
+</div>
   <?php endwhile; endif; ?>
 
-  <?php get_sidebar(); ?>
+
 
 <?php get_footer(); ?>
+

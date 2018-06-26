@@ -33,6 +33,8 @@ function my_acf_init() {
   acf_update_setting('google_api_key', 'AIzaSyCZF31krTQH_5QnEpdIsEgmsBV-Iy884rE');
 }
 
+
+
 add_action('wp_enqueue_scripts', 'wpeStyles'); // Add Theme Stylesheet
 function wpeStyles()  {
   wp_dequeue_style('fancybox');
@@ -76,40 +78,6 @@ function wpeHeaderScripts() {
 
   }
 }
-
-
-
-/*
-function add_defer_attribute($tag, $handle) {
-   // add script handles to the array below
-   $scripts_to_defer = array('jquery', 'jquery-migrate', 'modernizr', 'wpeScripts');
-
-   foreach($scripts_to_defer as $defer_script) {
-      if ($defer_script === $handle) {
-         return str_replace(' src', ' defer="defer" src', $tag);
-      }
-   }
-   return $tag;
-}
-add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);*/
-
-
-
-// Move js and css to footer
-function remove_head_scripts() {
-  remove_action( 'wp_head', 'wp_print_styles', 8);
-  remove_action('wp_head', 'wp_print_scripts');
-  remove_action('wp_head', 'wp_print_head_scripts', 9);
-  remove_action('wp_head', 'wp_enqueue_scripts', 1);
-
-
-  add_action('wp_footer', 'wp_print_styles', 5);
-  add_action('wp_footer', 'wp_print_scripts', 5);
-  add_action('wp_footer', 'wp_enqueue_scripts', 5);
-  add_action('wp_footer', 'wp_print_head_scripts', 5);
-}
-add_action( 'wp_enqueue_scripts', 'remove_head_scripts' );
-
 
 
 //  Remove wp_head() injected Recent Comment styles
@@ -166,14 +134,36 @@ function wpeHeadNav() {
     'after'           => '',
     'link_before'     => '',
     'link_after'      => '',
-    'items_wrap'      => '<ul class="headnav">%3$s</ul>',
+    'items_wrap'      => '<ul class="headnav mob-nav">%3$s</ul>',
+    'depth'           => 0,
+    'walker'          => ''
+    )
+  );
+}
+function wpeLangNav() {
+  wp_nav_menu(
+  array(
+    'theme_location'  => 'lang-menu',
+    'menu'            => '',
+    'container'       => 'div',
+    'container_class' => 'menu-{menu slug}-container',
+    'container_id'    => '',
+    'menu_class'      => 'menu',
+    'menu_id'         => '',
+    'echo'            => true,
+    'fallback_cb'     => 'wp_page_menu',
+    'before'          => '',
+    'after'           => '',
+    'link_before'     => '',
+    'link_after'      => '',
+    'items_wrap'      => '<ul class="header--lang mob-nav">%3$s</ul>',
     'depth'           => 0,
     'walker'          => ''
     )
   );
 }
 // WPE footer navigation
-function wpeFootNav() {
+/*function wpeFootNav() {
   wp_nav_menu(
   array(
     'theme_location'  => 'footer-menu',
@@ -194,7 +184,7 @@ function wpeFootNav() {
     'walker'          => ''
     )
   );
-}
+}*/
 // WPE sidebar navigation
 function wpeSideNav() {
   wp_nav_menu(
@@ -223,34 +213,24 @@ add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
 function register_html5_menu() {
   register_nav_menus(array(
     'header-menu' => __('Меню в шапке', 'wpeasy'),
+    'lang-menu' => __('Меню языков', 'wpeasy'),
     'sidebar-menu' => __('Меню в сайдбар', 'wpeasy'),
-    'footer-menu' => __('Меню в подвал', 'wpeasy')
+    //'footer-menu' => __('Меню в подвал', 'wpeasy')
   ));
 }
 //  If Dynamic Sidebar Existsов
 if (function_exists('register_sidebar')) {
   //  Define Sidebar Widget Area 1
   register_sidebar(array(
-    'name' => __('Блок виджетов #1', 'wpeasy'),
-    'description' => __('Description for this widget-area...', 'wpeasy'),
+    'name' => __('Footer Wdgets', 'wpeasy'),
+    'description' => __('Footer wigets, menu', 'wpeasy'),
     'id' => 'widgetarea1',
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'before_widget' => '<div id="%1$s" class="footer-widget %2$s col-md-3 col-sm-4 col-6">',
     'after_widget' => '</div>',
-    'before_title' => '<h6>',
-    'after_title' => '</h6>'
+    'before_title' => '<span class="footer-widget--title">',
+    'after_title' => '</span>'
   ));
-  //  Define Sidebar Widget Area 2. If your want to display more widget - uncoment this
-  /*
-  register_sidebar(array(
-    'name' => __('Блок виджетов #2', 'wpeasy'),
-    'description' => __('Description for this widget-area...', 'wpeasy'),
-    'id' => 'widgetarea2',
-    'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    'after_widget' => '</div>',
-    'before_title' => '<h6>',
-    'after_title' => '</h6>'
-  ));
-  */
+
 }
 
 //  Custom Excerpts
@@ -260,6 +240,9 @@ function wpeExcerpt10($length) {
 }
 function wpeExcerpt20($length) {
   return 20;
+}
+function wpeExcerpt30($length) {
+  return 30;
 }
 function wpeExcerpt40($length) {
   return 40;
@@ -280,16 +263,26 @@ function wpeExcerpt($length_callback = '', $more_callback = '') {
   $output = '<p>' . $output . '</p>';
   echo $output;
 }
+function shareExcerpt($length_callback = '') {
+  global $post;
+  if (function_exists($length_callback)) {
+      add_filter('excerpt_length', $length_callback);
+  }
+  $output = get_the_excerpt();
+  $output = apply_filters('wptexturize', $output);
+  $output = apply_filters('convert_chars', $output);
+  return $output;
+}
 
 //  Custom View Article link to Post
 //  RU: Добавляем "Читать дальше" к обрезанным записям
-/*
+
 function html5_blank_view_article($more) {
   global $post;
-  return '... <!-- noindex --><a rel="nofollow" class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'wpeasy') . '</a><!-- /noindex -->';
+  return '...';
 }
 add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
-*/
+
 // Remove the <div> surrounding the dynamic navigation to cleanup markup
 add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
 function my_wp_nav_menu_args($args = '') {
@@ -435,7 +428,6 @@ remove_action('wp_head', 'start_post_rel_link', 10, 0); // Start link
 remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // Display relational links for the posts adjacent to the current post.
 remove_action('wp_head', 'wp_generator'); // Display the XHTML generator that is generated on the wp_head hook, WP version
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
 // Add Filters
@@ -766,8 +758,82 @@ class FilterPagesByTemplate {
   }
 }//end class
 
-new FilterPagesByTemplate();
+/**
+ * WP: Unwrap images from <p> tag
+ * @param $content
+ * @return mixed
+ */
+function so226099_filter_p_tags_on_images( $content ) {
+    $content = preg_replace('/<p>\\s*?(<a .*?><img.*?><\\/a>|<img.*?>)?\\s*<\\/p>/s', '\1', $content);
 
+    return $content;
+}
+add_filter('the_content', 'so226099_filter_p_tags_on_images');
+
+
+/*
+function add_defer_attribute($tag, $handle) {
+   // add script handles to the array below
+   $scripts_to_defer = array('jquery', 'jquery-migrate', 'modernizr', 'wpeScripts');
+
+   foreach($scripts_to_defer as $defer_script) {
+      if ($defer_script === $handle) {
+         return str_replace(' src', ' defer="defer" src', $tag);
+      }
+   }
+   return $tag;
+}
+add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);*/
+
+
+
+// Move js and css to footer
+function remove_head_scripts() {
+  //remove_action( 'wp_head', 'wp_print_styles', 8);//remove CSS
+  remove_action('wp_head', 'wp_print_scripts');
+  remove_action('wp_head', 'wp_print_head_scripts', 9);
+  remove_action('wp_head', 'wp_enqueue_scripts', 1);
+
+
+  //add_action('wp_footer', 'wp_print_styles', 5); //ADD CSS TO FOOTER
+  add_action('wp_footer', 'wp_print_scripts', 5);
+  add_action('wp_footer', 'wp_enqueue_scripts', 5);
+  add_action('wp_footer', 'wp_print_head_scripts', 5);
+}
+add_action( 'wp_enqueue_scripts', 'remove_head_scripts' );
+
+
+
+// function social_sharing_buttons() {
+//   global $post;
+
+
+//       //wpeExcerpt('wpeExcerpt20');
+//     $shareURL = urlencode(get_permalink());
+//     $shareTitle = str_replace( ' ', '%20', get_the_title());
+//     $shareCont = str_replace( ' ', '%20', shareExcerpt(10));
+//     $shareThumbnail = get_the_post_thumbnail_url( $post->ID );
+
+//     $vkURL = 'http://vk.com/share.php?url=' . $shareURL.'&title=' . $shareTitle . '&description=' . $shareCont . '&image='. $shareThumbnail .'&noparse=true';
+//     $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$shareURL;
+//     $twitterURL = 'https://twitter.com/intent/tweet?text='.$shareTitle.'&url='.$shareURL;
+//     $googleURL = 'https://plus.google.com/share?url='.$shareURL;
+//     $instaURL = 'https://plus.google.com/share?url='.$shareURL;
+
+
+
+//     $content = '';
+//     $content .= '<div class="social-share">';
+//     $content .= '<a class="shared-link fa fa-vk" href="'.$vkURL.'" target="_blank" title=""></a>';
+//     $content .= '<a class="shared-link fa fa-facebook" href="' . $facebookURL .'" target="_blank" title=""></a>';
+//     $content .= '<a class="shared-link fa fa-twitter" href="'. $twitterURL .'" target="_blank"></a>';
+//     $content .= '<a class="shared-link fa fa-google-plus" href="' . $googleURL . '" target="_blank"></a>';
+//     $content .= '<a class="shared-link fa fa-instagram" href="'. $instaURL .'" target="_blank"></a>';
+//     $content .= '</div>';
+
+//     echo $content;
+
+// };
 
 
 ?>
