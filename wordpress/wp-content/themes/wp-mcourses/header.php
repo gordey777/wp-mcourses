@@ -26,7 +26,7 @@
   <header role="banner">
     <div class="container bottom-shadow">
       <div class="row flex_row">
-        <div class="logo-wrap col-lg-3 col-md-7 col-10">
+        <div class="logo-wrap col-xl-3 col-lg-4 col-md-7 col-10">
             <div class="logo">
               <?php if ( !is_front_page() && !is_home() ){ ?>
                 <a href="<?php echo home_url(); ?>">
@@ -38,13 +38,13 @@
             </div>
             <div class="header-slogan"><?php the_field('header_slogan', $front__id);?></div>
         </div>
-        <nav class="lang-nav col-lg-1" role="navigation">
+        <nav class="lang-nav col-xl-1" role="navigation">
           <?php wpeLangNav(); ?>
         </nav>
-        <nav class="main-nav  col-lg-5" role="navigation">
+        <nav class="main-nav  col-xl-5" role="navigation">
           <?php wpeHeadNav(); ?>
         </nav>
-        <div class="head-tel col-xl-3 col-lg-5 mob-nav">
+        <div class="head-tel col-xl-3 offset-xl-0 col-lg-5 offset-lg-3 mob-nav">
           <div class="call-wrapp col-3">
             <button title="Callback" class="btn callback" data-toggle="modal" data-target="#callbackModal"></button>
           </div>

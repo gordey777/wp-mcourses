@@ -41,7 +41,7 @@
                 <div class="course-title">
                   <div class="course-icon" style="background-image: url(<?php echo $icon; ?>);"></div>
                   <div class="course-label"><?php the_field('type_label');?></div>
-                  <div class="course-type"><?php if(get_field('alt_tittle')){ the_field('alt_tittle'); } else { the_title(); }; ?></div>
+                  <div class="course-type first"><?php if(get_field('alt_tittle')){ the_field('alt_tittle'); } else { the_title(); }; ?></div>
                 </div>
                 <div class="course-content">
                   <div class="course-desc"><?php wpeExcerpt('wpeExcerpt40'); ?></div>

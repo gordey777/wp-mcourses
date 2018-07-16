@@ -771,22 +771,6 @@ function so226099_filter_p_tags_on_images( $content ) {
 add_filter('the_content', 'so226099_filter_p_tags_on_images');
 
 
-/*
-function add_defer_attribute($tag, $handle) {
-   // add script handles to the array below
-   $scripts_to_defer = array('jquery', 'jquery-migrate', 'modernizr', 'wpeScripts');
-
-   foreach($scripts_to_defer as $defer_script) {
-      if ($defer_script === $handle) {
-         return str_replace(' src', ' defer="defer" src', $tag);
-      }
-   }
-   return $tag;
-}
-add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);*/
-
-
-
 // Move js and css to footer
 function remove_head_scripts() {
   //remove_action( 'wp_head', 'wp_print_styles', 8);//remove CSS
@@ -834,6 +818,211 @@ add_action( 'wp_enqueue_scripts', 'remove_head_scripts' );
 //     echo $content;
 
 // };
+
+
+
+//Відгуки
+add_action('init', 'register_review');
+function register_review(){
+    register_post_type('review', array(
+        'label'  => null,
+        'labels' => array(
+            'name'               => 'Відгуки',
+            'singular_name'      => 'Відгуки',
+            'add_new'            => 'Додати відгук',
+            'add_new_item'       => 'Додавання відгуку',
+            'edit_item'          => 'Редагування відгуку',
+            'new_item'           => 'Новий відгук',
+            'view_item'          => 'Переглянути відгук',
+            'search_items'       => 'Шукати відгук',
+            'not_found'          => 'Не знайдено',
+            'not_found_in_trash' => 'Не знайдено в корзині',
+            'parent_item_colon'  => '',
+            'menu_name'          => 'Відгуки',
+        ),
+        'public'             => true,
+        'publicly_queryable' => false,
+        'show_ui'            => true,
+        'query_var'          => true,
+        'menu_icon'          => 'dashicons-welcome-widgets-menus',
+        'capability_type'    => 'page',
+        'hierarchical'       => false,
+        'menu_position'      => 9,
+        'supports'           => array('title','editor','author','thumbnail','excerpt'),
+        'rewrite'        => array( 'slug'=>'review')
+    ) );
+}
+
+//ЗОБРАЖЕННЯ В СПИСКУ ПОСТІВ АДМІНКИ
+add_action('init', 'add_post_thumbs_in_post_list_table', 20 );
+function add_post_thumbs_in_post_list_table(){
+    $supports = get_theme_support('post-thumbnails');
+    if( ! isset($ptype_names) ){
+        if( $supports === true ){
+            $ptype_names = get_post_types(array( 'public'=>true ), 'names');
+            $ptype_names = array_diff( $ptype_names, array('attachment') );
+        }
+        elseif( is_array($supports) ){
+            $ptype_names = $supports[0];
+        }
+    }
+
+    foreach( $ptype_names as $ptype ){
+        add_filter( "manage_{$ptype}_posts_columns", 'add_thumb_column' );
+        add_action( "manage_{$ptype}_posts_custom_column", 'add_thumb_value', 10, 2 );
+    }
+}
+
+function add_thumb_column( $columns ){
+    add_action('admin_notices', function(){
+        echo '
+      <style>
+        .column-thumbnail{ width:80px; text-align:center; }
+      </style>';
+    });
+    $num = 1;
+    $new_columns = array( 'thumbnail' => __('Thumbnail') );
+    return array_slice( $columns, 0, $num ) + $new_columns + array_slice( $columns, $num );
+}
+
+function add_thumb_value( $colname, $post_id ){
+    if( 'thumbnail' == $colname ){
+        $width  = $height = 45;
+        if( $thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true ) ){
+            $thumb = wp_get_attachment_image( $thumbnail_id, array($width, $height), true );
+        }
+        elseif( $attachments = get_children( array(
+            'post_parent'    => $post_id,
+            'post_mime_type' => 'image',
+            'post_type'      => 'attachment',
+            'numberposts'    => 1,
+            'order'          => 'DESC',
+        ) ) ){
+            $attach = array_shift( $attachments );
+            $thumb = wp_get_attachment_image( $attach->ID, array($width, $height), true );
+        }
+        echo empty($thumb) ? ' ' : $thumb;
+    }
+}
+
+function the_excerpt_max_charlength( $charlength, $id = false ){
+    if(!$id) $id = get_the_ID();
+    $excerpt = get_the_excerpt();
+    $charlength++;
+    $html = ''.$id;
+    if ( mb_strlen( $excerpt ) > $charlength ) {
+        $subex = mb_substr( $excerpt, 0, $charlength - 5 );
+        $exwords = explode( ' ', $subex );
+        $excut = - ( mb_strlen( $exwords[ count( $exwords ) - 1 ] ) );
+        if ( $excut < 0 ) {
+            $html .= mb_substr( $subex, 0, $excut );
+        } else {
+            $html .= $subex;
+        }
+        $html .= '...';
+    } else {
+        $html .= $excerpt;
+    }
+    return $html;
+}
+
+add_filter( 'wp_image_editors', 'change_graphic_lib' );
+function change_graphic_lib($array) {
+  return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
+}
+
+
+//AJAX REVIEWS
+
+
+
+
+function add_review_ajax(){
+
+
+    //СТВОРЮЄМО ПОСТ
+    $postData = array(
+        'post_title'    => wp_strip_all_tags( $_REQUEST['review-name'] ),
+        'post_content'  => $_REQUEST['review-comment'],
+        'post_status'   => 'draft',
+        'post_author'   => 1,
+        'post_type'     => 'review'
+    );
+    $postID = wp_insert_post( $postData );
+
+
+    $types = array('image/jpeg', 'image/gif', 'image/png');
+    if (in_array($_FILES['input_img']['type'], $types) && $_FILES['input_img']['size'] < 1048576){
+      $wpUploadDir = wp_upload_dir();
+      $targetDir = $wpUploadDir['path'];
+      $targetFile = $targetDir .'/'. basename($_FILES["input_img"]["name"]);
+      $imageFileType = pathinfo($targetFile,PATHINFO_EXTENSION);
+      $checkFile = getimagesize($_FILES["input_img"]["tmp_name"]);
+        if($checkFile !== false) {
+            $uploadOk = 1;
+        } else {
+            $uploadOk = 0;
+        }
+        if ($uploadOk == 0) {
+            //echo "Sorry, your file was not uploaded.";
+            $fileUpload = false;
+        } else {
+            if (move_uploaded_file($_FILES["input_img"]["tmp_name"], $targetFile) ){
+                $fileUpload = true;
+            } else {
+                $fileUpload = false;
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+
+      //ПРИКРІПЛЮЄМО ЗОБРАЖЕННЯ (файл вже має бути завантажений в якусь директорію)
+      $fileType = wp_check_filetype( basename( $targetFile ), null );
+      //шлях до директорії завантажень
+      $wpUploadDir = wp_upload_dir();
+      $attachment = array(
+          'guid'           => $wpUploadDir['url'] . '/' . basename( $targetFile ),
+          'post_mime_type' => $fileType['type'],
+          'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $targetFile ) ),
+          'post_content'   => '',
+          'post_status'    => 'inherit'
+      );
+      //створюємо пост типу зображення і кріпимо до поста $postID
+      $attachID = wp_insert_attachment( $attachment, $targetFile, $postID );
+      //створюємо метадані в базі та оновлюємо зображення
+      require_once( ABSPATH . 'wp-admin/includes/image.php' );
+      $attachData = wp_generate_attachment_metadata( $attachID, $targetFile );
+      wp_update_attachment_metadata( $attachID, $attachData );
+      //робимо зображення мініатюрою
+      if($fileUpload) {
+          set_post_thumbnail($postID, $attachID);
+      }else{
+          set_post_thumbnail($postID, 2748);
+      }
+    } else {
+      echo "Sorry, there was an error uploading your file. File must be JPG, GIF or PNG, less than 1MB.";
+    }
+
+
+
+    $headers = array(
+        'From: Безвуляк (Додано відгук) <callback@bezvuliak.com>',
+        'content-type: text/html'
+    );
+    $message = '<h2>Додано новий відгук</h2>';
+    $message .= 'Для перегляду відгуку зайдіть за <a href="http://'.$_SERVER['HTTP_HOST'].'/wp-admin/post.php?post='.$postID.'&action=edit"><b>цим посиланням</b></a>.<br>';
+    $message .= 'Новий відгук буде із статусом <b>чернетка</b>, для того, щоб він з\'явився на сайті - опублікуйте його.';
+    $message .= 'Мова з якої був залишений відгук - '.get_locale();
+    //відправлення листа адміністратору із посиланням на новий відгук
+    wp_mail( get_option('admin_email'), 'Додано відгук на сайті Готель Едем', $message, $headers );
+
+  die();
+}
+
+
+add_action('wp_ajax_review_ajax', 'add_review_ajax');
+add_action('wp_ajax_nopriv_review_ajax', 'add_review_ajax');
+
+
 
 
 ?>

@@ -8041,11 +8041,144 @@ jQuery(document).ready(function($) {
 
 
 
-//button data to form
+  //button data to form
 
   $('.btn-order').click(function(event) {
     var formtarg = $(this).data('formtarg');
     $('#modal-order-target').val(formtarg);
+  });
+  //revValid();
+
+
+  /*  function revValid() {
+      var button = $('#review-submit');
+
+
+      var inputName = $('#review-name');
+      var formName = inputName.val();
+      var inputText = $('#review-comment');
+      var formText = inputText.val();
+
+      if (!formName || formName == '' || !formText || formText == '') {
+        $('#review-submit').addClass('loadingform');
+        button.attr("disabled", true);
+      } else {
+        $('#review-submit').removeClass('loadingform');
+        button.attr("disabled", false);
+      }
+    }*/
+
+  /*  $('#review-name, #review-comment').on('change', function(e) {
+      var inputName = $('#review-name');
+      var formName = inputName.val();
+      var inputText = $('#review-comment');
+      var formText = inputText.val();
+      inputName.removeClass('active');
+      inputText.removeClass('active');
+      if (!formName || formName == '') {
+        inputName.addClass('active');
+      }
+      if (!formText || formText == '') {
+        inputText.addClass('active');
+      }
+      //revValid();
+    });*/
+
+
+
+
+  $("#input-img").change(function() {
+    uploadImg(this);
+    $('.review-img-block').show();
+  });
+
+
+
+  function uploadImg(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var staticSquare = 150;
+        var image = new Image();
+        image.src = e.target.result;
+        image.onload = function() {
+          $('.review-add .input-img').css('background-image', 'url(' + this.src + ')');
+          validate();
+        };
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+
+  function validate() {
+    $("#file_error").html("");
+    $("#file_error").hide("fast");
+    $(".review-add .input-img").css("border-color", "transparent");
+    var file_size = $('#input-img')[0].files[0].size;
+    $('#review-submit').attr("disabled", false);
+    if (file_size > 1048576) {
+      $("#file_error").html("File size is greater than 1MB");
+      $(".review-add .input-img").css("border-color", "#FF0000");
+      $('#review-submit').attr("disabled", true);
+      $("#file_error").show("fast");
+      return false;
+    }
+    return true;
+  }
+
+
+  $('#commentform').submit(function() {
+    var filter = $('#commentform'),
+      buttontext = filter.find('button').text(),
+      successMass = $('.form-message').html();
+    console.log($('#input-img').val());
+
+    var review_name = jQuery('#review-name').val();
+    var review_comment = jQuery('#review-comment').val();
+    var file_data = jQuery('#input-img').prop('files')[0];
+    var form_data = new FormData();
+
+    form_data.append('input_img', file_data);
+    form_data.append('action', 'review_ajax');
+    form_data.append('review-name', review_name);
+    form_data.append('review-comment', review_comment);
+    var inputName = $('#review-name');
+    var formName = inputName.val();
+    var inputText = $('#review-comment');
+    var formText = inputText.val();
+    inputName.removeClass('active');
+    inputText.removeClass('active');
+    if (!formName || formName == '') {
+      inputName.addClass('active');
+    }
+    if (!formText || formText == '') {
+      inputText.addClass('active');
+    }
+
+
+
+    $.ajax({
+      url: adminAjax['ajaxurl'],
+      //data: filter.serialize(), // form data
+      data: form_data, // form data
+      type: 'POST', // POST
+      contentType: false,
+      processData: false,
+      beforeSend: function(xhr) {
+        //$('#rev_wrap').html('');
+      },
+      success: function(data) {
+        // console.log(data);
+        //
+        $('#rev_wrap').html(data);
+
+        $('#rev_wrap').html(successMass + "<br>" + data);
+        $('.form-message').css('display', 'block');
+      }
+    });
+
+    return false;
   });
 
 
