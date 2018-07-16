@@ -24,7 +24,7 @@ get_header(); ?>
         </div>
         <h1 class="section-title col-12"><?php the_title(); ?></h1>
         <div class="subtitle col-sm-8 offset-sm-2"><?php the_field('subtitle'); ?></div>
-        <div class="courses-properties col-lg-6 offset-lg-3 col-sm-8 offset-sm-2">
+        <div class="courses-properties col-lg-6 offset-lg-3 col-md-8 offset-md-2">
 
           <div class="course-date <?php the_field('type_color'); ?>">
             <div class="label"><?php the_field('date_label'); ?></div>

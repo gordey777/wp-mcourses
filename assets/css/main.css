@@ -8320,6 +8320,20 @@ nav ul li {
   background-size: auto 35px;
 }
 
+.form-wrap .text-wrap {
+  height: auto;
+  padding-left: 1px;
+  background: #8bab00;
+}
+
+.form-wrap .text-wrap:before {
+  background-size: auto 35px;
+}
+
+.form-wrap .text-wrap textarea {
+  margin: 0;
+}
+
 .form-wrap .text-input {
   display: inline-block;
   width: 100%;
@@ -8907,6 +8921,183 @@ aside {
   margin: 0 auto 30px auto;
 }
 
+/*review*/
+.form-message {
+  display: none;
+}
+
+.review-list__image {
+  text-align: center;
+}
+
+.review-list__image img {
+  width: 75px;
+  height: 75px;
+  margin-top: 15px;
+  border-radius: 50%;
+}
+
+.review-add .active {
+  outline: solid 2px red;
+}
+
+.review-list__item {
+  position: relative;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #37474f;
+  background: #fff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.review-list__item b {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 35px;
+  position: relative;
+  display: inline-block;
+  width: auto;
+  margin-bottom: 15px;
+}
+
+.review-list__item b:before {
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 70%;
+  height: 1px;
+  content: '';
+  background: #ff9801;
+}
+
+.review-list__item b span {
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 10px;
+  color: #888;
+}
+
+.review-list__item p {
+  font-size: 15px;
+  line-height: 20px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.review-list__item p:last-child {
+  margin-bottom: 0;
+}
+
+.review-list__item .container {
+  position: relative;
+}
+
+.review-item-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding-top: calc(100% - 20px);
+  border-radius: 50%;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.review-title {
+  margin-bottom: 40px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.add-review__block {
+  margin: 50px 0;
+  padding-top: 40px;
+  text-align: center;
+}
+
+.review-add .form-wrap .name-wrap {
+  margin-bottom: 0;
+}
+
+.review-add .form-wrap .name-wrap input {
+  height: 100%;
+  margin: 0;
+}
+
+.review-add .form-wrap .text-wrap {
+  height: 100%;
+  min-height: 100%;
+}
+
+.review-add .form-wrap .text-wrap textarea {
+  min-height: 100%;
+}
+
+.review-add .form-wrap .submit-wrap {
+  padding-top: 40px;
+}
+
+.review-add #input-img {
+  display: none;
+}
+
+.review-add #file_error {
+  font-weight: bold;
+  position: absolute;
+  top: -40px;
+  right: 0;
+  left: 0;
+  display: inline-block;
+  height: 40px;
+  text-align: center;
+  color: #f00;
+  background: #fff;
+}
+
+.review-add .input-img {
+  line-height: 150px;
+  position: relative;
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  margin-bottom: 20px;
+  cursor: pointer;
+  text-align: center;
+  color: #141414;
+  border: solid 1px #8e24aa;
+  border-radius: 50%;
+  background-color: #f2f2f2;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.review-add .error-field {
+  border: solid 1px #b41c21 !important;
+}
+
+.review-add .error-field::-webkit-input-placeholder {
+  color: #b41c21;
+}
+
+.review-add .error-field::-moz-placeholder {
+  color: #b41c21;
+}
+
+.review-add .error-field:-ms-input-placeholder {
+  color: #b41c21;
+}
+
+.review-add .error-field:-moz-placeholder {
+  color: #b41c21;
+}
+
+.review-add .screen-reader-text {
+  display: none;
+}
+
 footer .footer-top {
   padding-top: 70px;
   padding-bottom: 20px;
@@ -9101,13 +9292,20 @@ footer .footer-cop .copyright {
     padding-right: 10px;
   }
   .header-slogan {
-    font-size: 19px;
+    font-size: 18px;
   }
   .header-slogan span {
-    font-size: 11.5px;
+    font-size: 11px;
   }
   .headnav > li > a {
     font-size: 18px;
+  }
+  .course-item .course-title .course-type {
+    font-size: 34px;
+    padding: 0 8px 0 20px;
+  }
+  .course-item .course-title .course-type.first {
+    font-size: 36px;
   }
 }
 
@@ -9154,7 +9352,7 @@ footer .footer-cop .copyright {
     width: 60px;
   }
   .course-item .course-title .course-type {
-    font-size: 29px;
+    font-size: 27px;
     line-height: 60px;
     height: 60px;
   }
@@ -9162,6 +9360,9 @@ footer .footer-cop .copyright {
     font-size: 23px;
     padding-top: 0;
     padding-bottom: 3px;
+  }
+  .course-item .course-title .course-type.first {
+    font-size: 30px;
   }
   .looper-item .more-link,
   .looper-item .btn {
@@ -9171,6 +9372,7 @@ footer .footer-cop .copyright {
 }
 
 @media (max-width: 991px) {
+  background-position: 0 0;
   .section-title {
     font-size: 35px;
   }
@@ -9239,16 +9441,16 @@ footer .footer-cop .copyright {
     padding-top: 40%;
     padding-bottom: 0;
     background-position: center top;
-    background-size: 100% auto;
+    background-size: contain;
   }
   .page-advantages:before {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 30%, #fbfbfb 45%, #fbfbfb 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 25vw, #fbfbfb 85vw, #fbfbfb 100%);
   }
   .page-advantages .adv-cont-wrap {
     padding-bottom: 0;
   }
-  .page-advantages:before {
-    display: none;
+  .page-advantages .adv-cont-title {
+    text-shadow: 0 0 5px rgba(251, 251, 251, 0.8), 0 0 5px rgba(251, 251, 251, 0.8);
   }
 }
 
@@ -9321,6 +9523,65 @@ footer .footer-cop .copyright {
     bottom: auto;
     left: 0;
     height: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-title-wrap .course-duration .value,
+  .page-title-wrap .course-price .value {
+    font-size: 55px;
+  }
+}
+
+@media (max-width: 455px) {
+  .section-title {
+    font-size: 47px;
+  }
+  .page-title-wrap .course-date .date {
+    font-size: 33px;
+  }
+  .page-title-wrap .course-duration .value,
+  .page-title-wrap .course-price .value {
+    font-size: 43px;
+  }
+}
+
+@media (max-width: 400px) {
+  .section-title {
+    font-size: 43px;
+  }
+  .course-item .course-title .course-type {
+    padding: 0 0 0 10px;
+  }
+  .page-title-wrap .course-duration,
+  .page-title-wrap .course-price {
+    width: 100%;
+  }
+  .page-title-wrap .course-price {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 370px) {
+  .section-title {
+    font-size: 36px;
+  }
+  .course-item.courses-first .course-title .course-type {
+    font-size: 23px;
+  }
+  .course-item .more-link,
+  .course-item .btn {
+    width: 100%;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 350px) {
+  .header-slogan {
+    font-size: 17px;
+  }
+  .header-slogan span {
+    font-size: 10px;
   }
 }
 
