@@ -64,8 +64,6 @@ get_header(); ?>
       <div class="row">
         <div class="col-lg-6 offset-lg-6 adv-cont-wrap">
           <div class="adv-cont-title"><?php the_field('adv_title'); ?></div>
-
-
           <?php if( have_rows('advanteges') ): ?>
           <?php $i = 0; ?>
             <div class="page-adv-cont">
