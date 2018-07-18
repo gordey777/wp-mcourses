@@ -316,8 +316,11 @@
         <div class="col-lg-6">
           <?php $front_video = get_field('home_content_video'); ?>
           <?php if($front_video){ ?>
+            $img_input = $front_video['thumbs']['maximum']["url"];
+            $img_url = preg_replace('#^http(s)?:#', '', $img_input);
+            ?>
             <div class="home-video--item">
-                <div class="videoholder" data-video="<?php echo $front_video['vid']; ?>" style="background-image: url(<?php echo $front_video['thumbs']['maximum']["url"]; ?>);">
+                <div class="videoholder" data-video="<?php echo $front_video['vid']; ?>" style="background-image: url(<?php echo $img_url; ?>);">
                   <div class="video-title"><?php echo $front_video["title"]; ?></div>
                 </div>
             </div>

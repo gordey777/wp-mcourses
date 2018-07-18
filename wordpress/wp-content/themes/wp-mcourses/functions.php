@@ -1009,7 +1009,7 @@ function add_review_ajax(){
         'content-type: text/html'
     );
     $message = '<h2>Додано новий відгук</h2>';
-    $message .= 'Для перегляду відгуку зайдіть за <a href="http://'.$_SERVER['HTTP_HOST'].'/wp-admin/post.php?post='.$postID.'&action=edit"><b>цим посиланням</b></a>.<br>';
+    $message .= 'Для перегляду відгуку зайдіть за <a href="//'.$_SERVER['HTTP_HOST'].'/wp-admin/post.php?post='.$postID.'&action=edit"><b>цим посиланням</b></a>.<br>';
     $message .= 'Новий відгук буде із статусом <b>чернетка</b>, для того, щоб він з\'явився на сайті - опублікуйте його.';
     $message .= 'Мова з якої був залишений відгук - '.get_locale();
     //відправлення листа адміністратору із посиланням на новий відгук
